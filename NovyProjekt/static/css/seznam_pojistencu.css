@@ -1,0 +1,144 @@
+/* seznam pojistencu */
+/* Modré tlačítko */
+.btn {
+    background-color: #007bff; /* Modrá barva */
+    color: white; /* Bílý text */
+    padding: 10px 20px; /* Vnitřní odsazení */
+    border: none; /* Bez rámečku */
+    border-radius: 5px; /* Zaoblené rohy */
+    cursor: pointer; /* Ukazatel myši */
+    text-decoration: none; /* Odstranění podtržení */
+    font-size: 16px; /* Velikost písma */
+    transition: background-color 0.3s ease; /* Přechod při hover */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Tmavší modrá při hoveru */
+}
+/* Styl pro seznam pojištěnců */
+.pojistenci-list {
+    list-style-type: none; /* Odstranění teček u seznamu */
+    padding: 0; /* Odstranění vnitřního okraje */
+    margin: 20px 0; /* Přidání vnějšího okraje */
+}
+
+/* Styl pro jednotlivé položky seznamu */
+.pojistenci-list li {
+    background-color: #f8f9fa; /* Světle šedé pozadí */
+    border: 1px solid #dee2e6; /* Světle šedý okraj */
+    border-radius: 5px; /* Zaoblení rohů */
+    padding: 10px; /* Vnitřní okraj */
+    margin-bottom: 10px; /* Spodní okraj mezi položkami */
+    display: flex; /* Flexbox pro horizontální zarovnání */
+    justify-content: space-between; /* Rozdělení prostoru mezi položkami */
+    align-items: center; /* Vertikální zarovnání */
+}
+
+/* Styl pro akční odkazy */
+.pojistenci-actions a {
+    margin-left: 10px; /* Mezera mezi odkazy */
+    color: #007bff; /* Modrá barva textu */
+    text-decoration: none; /* Odstranění podtržení */
+}
+
+.pojistenci-actions a:hover {
+    text-decoration: underline; /* Podtržení při najetí myší */
+    color: #0056b3; /* Tmavší modrá při najetí */
+}
+.container-pojistenci {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.pojistenci-list li:hover {
+    background-color: #f0f0f0; /* Světle šedá barva pozadí */
+}
+
+/* Základní styly pro paginaci */
+.pagination {
+    display: flex;
+    justify-content: center; /* Centering the pagination */
+    margin: 20px 0; /* Top and bottom margin */
+    font-size: 16px; /* Font size */
+}
+
+.step-links {
+    display: flex;
+    list-style: none; /* Remove default list styles */
+    padding: 0; /* Remove default padding */
+}
+
+.step-links a {
+    text-decoration: none; /* Remove underline from links */
+    padding: 8px 12px; /* Padding around the links */
+    margin: 0 5px; /* Spacing between the links */
+    border: 1px solid #007bff; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    color: #007bff; /* Link color */
+    transition: background-color 0.3s, color 0.3s; /* Transition for hover effects */
+}
+
+.step-links a:hover {
+    background-color: #007bff; /* Background color on hover */
+    color: #fff; /* Text color on hover */
+}
+
+.current {
+    padding: 8px 12px; /* Padding around the current page indicator */
+    margin: 0 5px; /* Spacing */
+    font-weight: bold; /* Make current page bold */
+    color: #555; /* Color for current page */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* Styles for the "first", "last", "next", and "previous" buttons */
+.step-links a:disabled {
+    color: #ccc; /* Greyed out color for disabled links */
+    pointer-events: none; /* Prevent clicks on disabled links */
+    border: 1px solid #ccc; /* Grey border */
+}
+
+th:last-child {
+    text-align: right; /* Zarovná text v buňce doprava */
+    padding-right: 20px; /* Odsazení zprava pro větší mez */
+    font-weight: bold; /* Zvýraznění textu */
+}
+
+td:last-child {
+    text-align: right; /* Zarovná obsah buněk v posledním sloupci doprava */
+    padding-right: 20px; /* Přidá odsazení zprava pro lepší vzhled */
+}
+
+/* Stylování tlačítek "Upravit" a "Smazat" */
+.pojistenci-actions a {
+    text-decoration: none; /* Odstranění podtržení textu */
+    color: #007bff; /* Modrá barva textu */
+    border: 1px solid #007bff; /* Modrý rámeček kolem tlačítek */
+    padding: 5px 10px; /* Vnitřní okraje tlačítek */
+    border-radius: 4px; /* Zaoblení rohů tlačítek */
+    font-weight: bold; /* Zvýraznění textu */
+    margin-left: 10px; /* Mezera mezi tlačítky */
+    display: inline-block; /* Pro zobrazení tlačítek vedle sebe */
+}
+
+/* Hover efekt pro tlačítko "Detail" (modré pozadí) */
+.pojistenci-actions a:first-child:hover {
+    background-color: #007bff; /* Modré pozadí při hoveru */
+    color: white; /* Bílý text při hoveru */
+    text-decoration: none;
+}
+
+/* Hover efekt pro tlačítko "Upravit" (oranžové pozadí) */
+.pojistenci-actions a:nth-child(2):hover {
+    background-color: #ffa500; /* Oranžové pozadí při hoveru */
+    color: white; /* Bílý text při hoveru */
+    text-decoration: none;
+}
+
+/* Hover efekt pro tlačítko "Smazat" (červené pozadí) */
+.pojistenci-actions a:last-child:hover {
+    background-color: #ff0000; /* Červené pozadí při hoveru */
+    color: white; /* Bílý text při hoveru */
+    text-decoration: none;
+}}

@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+
+{% block title %}Smazat pojištění{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Opravdu chcete smazat pojištění?</h2>
+        <p>Typ pojištění: {{ pojisteni.typ_pojisteni }}</p>
+        <p>Platnost do: {{ pojisteni.platnost_do }}</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit">Ano, smazat</button>
+        </form>
+        <a href="{% url 'detail_pojistence' pk=pojistenec.pk %}">Zpět na detail pojištence</a>
+    </div>
+{% endblock %}

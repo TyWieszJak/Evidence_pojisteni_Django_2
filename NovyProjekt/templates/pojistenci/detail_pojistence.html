@@ -1,0 +1,71 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Detail pojištěnce{% endblock %}
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="detail-header">
+        <h2 class="detail-title">Detail pojištěnce</h2>
+    </div>
+    <div class="container-detail">
+        <div class="detail-information">
+            <div class="detail-info-wrapper">
+                <ul>
+                    <li><strong>Jméno:</strong> {{ pojistenec.jmeno }}</li>
+                    <li><strong>Příjmení:</strong> {{ pojistenec.prijmeni }}</li>
+                    <li><strong>Adresa:</strong> {{ pojistenec.adresa }}</li>
+                    <li><strong>Věk:</strong> {{ pojistenec.vek }}</li>
+                </ul>
+            </div>
+        </div>
+        {% if pojistenec.foto %}
+            <div class="detail-fotografie">
+                <img src="{{ pojistenec.foto.url }}" alt="Foto pojištěnce">
+            </div>
+        {% else %}
+            <div class="no-fotografie">
+                <p class="fotografie">Fotografie není k dispozici.</p>
+            </div>
+        {% endif %}
+
+        <div class="detail-actions">
+            <a href="{% url 'upravit_pojistence' pk=pojistenec.pk %}">Upravit</a>
+            <a href="{% url 'smazat_pojistence' pk=pojistenec.pk %}">Smazat</a>
+            <a href="{% url 'seznam_pojistencu' %}" class="btn-detail">Zpět na seznam</a>
+            <a href="{% url 'pridat_pojisteni' pk=pojistenec.pk %}" class="btn-detail">Přidat pojištění</a>
+        </div>
+    </div>
+<!-- Tabulka sjednaná pojištění -->
+        <div class="sjednana-pojisteni">
+            <h3>Sjednaná pojištění</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pojistění</th>
+                        <th>Částka</th>
+                        <th>Akce</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pojisteni in pojistenec.pojisteni.all %}
+                        <tr>
+                            <td>{{ pojisteni.typ_pojisteni }}</td>
+                            <td>{{ pojisteni.castka }}</td>
+                            <td>
+                                <a href="{% url 'upravit_pojisteni' pk=pojisteni.pk %}">Upravit</a> |
+                                <a href="{% url 'smazat_pojisteni' pk=pojisteni.pk %}">Odstranit</a>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="3">Žádná sjednaná pojištění nejsou k dispozici.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

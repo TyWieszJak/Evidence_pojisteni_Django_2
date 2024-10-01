@@ -1,0 +1,127 @@
+/* Resetování základního stylování */
+body, h1, p {
+    margin: 0;
+    padding: 0;
+}
+html, body {
+    height: 100%; /* Zajištění, že tělo zabírá 100% výšky */
+    margin: 0; /* Odstranění výchozího okraje */
+}
+
+/* Základní stylování pro tělo */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Hlavička */
+header {
+    background-color: #007bff; /* Modrá barva */
+    color: white;
+    padding: 10px 20px;
+    position: relative;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px; /* Výška loga */
+}
+
+.nav-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 10px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.auth-links a {
+     color: white;
+    text-decoration: none;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    top: 40px;
+    box-sizing: border-box;
+}
+
+/* Hlavní obsah */
+main {
+    padding: 20px;
+
+}
+
+.main-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.action-box {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 45%;
+    text-align: center;
+}
+
+.action-box h3 {
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: #007bff; /* Modrá barva */
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Tmavší modrá */
+}
+
+/* Spodní lišta */
+footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    bottom: 0;
+    width: 100%;
+}
+
+footer .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Minimální výška wrapperu je 100% výšky okna */
+}
+
+.content {
+    flex: 1; /* Obsah zabere zbytek dostupného místa */
+}

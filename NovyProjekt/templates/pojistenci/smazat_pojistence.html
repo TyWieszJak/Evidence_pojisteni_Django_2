@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+
+{% block title %}Smazat pojištěnce{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Ověření smazání pojištěnce</h1>
+        <p>Opravdu chcete smazat pojištěnce {{ pojistenec.jmeno }} {{ pojistenec.prijmeni }}?</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Smazat</button>
+            <a href="{% url 'seznam_pojistencu' %}" class="btn">Zrušit</a>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Přidat pojištění{% endblock %}
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'css/pridat_pojisteni.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container-pojisteni">
+        <h1>Přidat pojištění</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Uložit</button>
+        </form>
+    </div>
+{% endblock %}

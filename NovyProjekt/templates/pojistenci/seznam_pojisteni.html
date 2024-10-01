@@ -1,0 +1,67 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Seznam pojištění{% endblock %}
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'css/seznam_pojisteni.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container-seznam_pojisteni">
+        <h2>Seznam pojištění</h2>
+
+        <!-- Zobrazte formulář pro vyhledávání -->
+        <form method="GET">
+            {% csrf_token %}
+            {{ vyhledavaci_form.as_p }}
+            <button type="submit">Hledat</button>
+        </form>
+
+        <!-- Zobrazte seznam pojištění -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Typ pojištění</th>
+                    <th>Platnost do</th>
+                    <th>Pojištěnec</th>
+                    <th>Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pojist in pojisteni %}
+                    <tr>
+                        <td>{{ pojist.typ_pojisteni }}</td>
+                        <td>{{ pojist.platnost_do }}</td>
+                        <td>{{ pojist.pojistenec.jmeno }} {{ pojist.pojistenec.prijmeni }}</td>
+                        <td>
+                            <div class="pojistenci-actions">
+                                <a href="{% url 'upravit_pojisteni' pk=pojist.pk %}">Upravit</a>
+                                <a href="{% url 'smazat_pojisteni' pk=pojist.pk %}">Smazat</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">Žádná pojištění nenalezena.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Paginace -->
+        <div class="pagination">
+            <span class="step-links">
+                {% if pojisteni.has_previous %}
+                    <a href="?page=1">&laquo; První</a>
+                    <a href="?page={{ pojisteni.previous_page_number }}">Předchozí</a>
+                {% endif %}
+
+                <span class="current">
+                    Stránka {{ pojisteni.number }} z {{ pojisteni.paginator.num_pages }}.
+                </span>
+
+                {% if pojisteni.has_next %}
+                    <a href="?page={{ pojisteni.next_page_number }}">Další</a>
+                    <a href="?page={{ pojisteni.paginator.num_pages }}">Poslední &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+{% endblock %}
