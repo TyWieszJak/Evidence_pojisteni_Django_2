@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Smazat pojistnou událost{% endblock %}
+
+{% block content %}
+<h1>Smazat pojistnou událost</h1>
+
+<p>Opravdu chcete smazat tuto pojistnou událost?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn">Smazat</button>
+    <a href="{% url 'seznam_pojistnych_udalosti' %}" class="btn">Zrušit</a>
+</form>
+{% endblock %}

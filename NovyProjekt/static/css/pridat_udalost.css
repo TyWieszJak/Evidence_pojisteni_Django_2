@@ -1,0 +1,56 @@
+/* pridat_udalost.css */
+
+/* Kontejner pro přidání pojistné události */
+.container-pridat {
+    max-width: 500px; /* Snížená maximální šířka kontejneru */
+    margin: 40px auto; /* Vytvoření mezery nahoře a automatické vycentrování */
+    padding: 20px; /* Menší vnitřní odsazení */
+    background-color: #f9f9f9; /* Světle šedé pozadí */
+    border-radius: 8px; /* Menší zaoblení rohů */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Jemný stín pro 3D efekt */
+}
+
+/* Nadpis */
+.container-pridat h2 {
+    text-align: center; /* Zarovnání nadpisu na střed */
+    color: #333; /* Tmavě šedá barva textu */
+    margin-bottom: 20px; /* Menší mezery pod nadpisem */
+    font-size: 1.5em; /* Menší velikost písma */
+}
+
+/* Styl pro formulářová pole */
+form {
+    display: flex; /* Použití flexboxu pro rozložení */
+    flex-direction: column; /* Sloupcové uspořádání */
+    gap: 15px; /* Menší mezery mezi prvky */
+}
+
+form input, form select, form textarea {
+    padding: 10px; /* Menší vnitřní odsazení pro formulářová pole */
+    font-size: 1em; /* Menší velikost písma */
+    border: 2px solid #007bff; /* Modrý rámeček */
+    border-radius: 6px; /* Menší zaoblení rohů */
+    transition: border-color 0.3s ease; /* Plynulý přechod pro změnu barvy rámečku */
+}
+
+form input:focus, form select:focus, form textarea:focus {
+    border-color: #0056b3; /* Tmavě modrá barva při zaostření */
+    outline: none; /* Zrušení standardního rámečku */
+}
+
+/* Styl tlačítka pro odeslání */
+form button.btn {
+    padding: 10px 20px; /* Menší odsazení pro tlačítko */
+    background-color: #007bff; /* Modré pozadí */
+    color: white; /* Bílá barva textu */
+    font-size: 1em; /* Menší velikost písma */
+    font-weight: bold; /* Tlustý text */
+    border: none; /* Bez okraje */
+    border-radius: 6px; /* Menší zaoblení rohů */
+    cursor: pointer; /* Ukazatel myši se změní na ruku */
+    transition: background-color 0.3s ease; /* Plynulý přechod pro změnu barvy pozadí */
+}
+
+form button.btn:hover {
+    background-color: #0056b3; /* Změna barvy při najetí myší */
+}

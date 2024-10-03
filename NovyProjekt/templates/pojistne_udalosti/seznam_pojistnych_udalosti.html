@@ -1,0 +1,61 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Seznam pojistných událostí{% endblock %}
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'css/pojistne_udalosti.css' %}">
+{% endblock %}
+{% block content %}
+<h1>Seznam pojistných událostí</h1>
+<a href="{% url 'pridat_pojistnou_udalost' %}" class="btn">Přidat pojistnou událost</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Pojistka</th>
+            <th>Datum události</th>
+            <th>Popis</th>
+            <th>Status</th>
+            <th>Částka</th>
+            <th>Akce</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for udalost in page_obj %}
+        <tr>
+            <td>{{ udalost.pojisteni }}</td>
+            <td>{{ udalost.datum_udalosti }}</td>
+            <td>{{ udalost.popis }}</td>
+            <td>{{ udalost.status }}</td>
+            <td>{{ udalost.castka }}</td>
+            <td>
+                <a href="{% url 'upravit_pojistnou_udalost' udalost.id %}" class="action-btn edit-btn">Upravit</a>
+                <a href="{% url 'smazat_pojistnou_udalost' udalost.id %}" class="action-btn delete-btn">Smazat</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">Žádné pojistné události nenalezeny.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; První</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Předchozí</a>
+        {% endif %}
+
+        <span class="current">
+            Stránka {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Další</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Poslední &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Registrace</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Zaregistrovat se</button>
+    </form>
+    <p>Již máte účet? <a href="{% url 'prihlaseni' %}">Přihlaste se zde</a>.</p>
+</div>
+{% endblock %}

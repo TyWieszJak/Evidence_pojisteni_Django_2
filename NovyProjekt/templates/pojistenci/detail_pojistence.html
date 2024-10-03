@@ -54,8 +54,10 @@
                             <td>{{ pojisteni.typ_pojisteni }}</td>
                             <td>{{ pojisteni.castka }}</td>
                             <td>
+                                <a href="{% url 'detail_pojisteni' pk=pojisteni.pk %}">Detail</a> |
                                 <a href="{% url 'upravit_pojisteni' pk=pojisteni.pk %}">Upravit</a> |
                                 <a href="{% url 'smazat_pojisteni' pk=pojisteni.pk %}">Odstranit</a>
+
                             </td>
                         </tr>
                     {% empty %}

@@ -1,6 +1,16 @@
-from django.contrib import admin
-from .models import Pojistenec  # Importuj svůj model
+from django.contrib.auth.models import Group, Permission
+from django.contrib.contenttypes.models import ContentType
+from .models import PojistnaUdalost
 
-@admin.register(Pojistenec)
-class PojistenecAdmin(admin.ModelAdmin):
-    list_display = ('jmeno', 'prijmeni')  # Zobrazí tato pole v seznamu
+# Vytvořte skupiny a přiřaďte jim oprávnění
+admin_group, created = Group.objects.get_or_create(name='Administrators')
+insured_group, created = Group.objects.get_or_create(name='Insured')
+
+# Přiřazení oprávnění pro administrátora
+admin_permissions = Permission.objects.all()
+admin_group.permissions.set(admin_permissions)
+
+# Přiřazení omezených oprávnění pro pojištěného
+content_type = ContentType.objects.get_for_model(PojistnaUdalost)
+insured_permissions = Permission.objects.filter(content_type=content_type)
+insured_group.permissions.set(insured_permissions)

@@ -7,49 +7,71 @@
 {% endblock %}
 {% block content %}
 
-    <div class="container-pojistenci">
-        <h1>Seznam pojištěnců</h1>
-        <div style="margin-top: 20px;"></div>
-        <!-- Tlačítko pro přidání nového pojištěnce -->
-        <a href="{% url 'pridat_pojistence' %}" class="btn">Přidat pojištěnce</a>
+<div class="container-pojistenci">
+    <h1>Seznam pojištěnců</h1>
+    <div style="margin-top: 20px;"></div>
+    <!-- Tlačítko pro přidání nového pojištěnce -->
+    <a href="{% url 'pridat_pojistence' %}" class="btn">Přidat pojištěnce</a>
+    <!-- Formulář pro vyhledávání -->
+    <form method="GET" class="vyhledavaci-form">
+        {{ vyhledavaci_form.jmeno.label_tag }} {{ vyhledavaci_form.jmeno }} <!-- Jméno -->
+        {{ vyhledavaci_form.prijmeni.label_tag }} {{ vyhledavaci_form.prijmeni }} <!-- Příjmení -->
+        <button type="submit">Hledat</button>
+    </form>
 
-        {% if page_obj %}
-            <ul class="pojistenci-list">
+
+    {% if page_obj %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Jméno</th>
+                    <th>Příjmení</th>
+                    <th>Adresa</th>
+                    <th>Akce</th>
+                </tr>
+            </thead>
+            <tbody>
                 {% for pojistenec in page_obj %}
-                    <li>
-                        {{ pojistenec.jmeno }} {{ pojistenec.prijmeni }}
-                        <div class="pojistenci-actions">
-                            <a href="{% url 'detail_pojistence' pojistenec.pk %}">Detail</a>
-                            <a href="{% url 'upravit_pojistence' pojistenec.pk %}">Upravit</a>
-                            <a href="{% url 'smazat_pojistence' pojistenec.pk %}">Smazat</a>
-                        </div>
-                    </li>
+                    <tr>
+                        <td>{{ pojistenec.jmeno }}</td>
+                        <td>{{ pojistenec.prijmeni }}</td>
+                        <td>{{ pojistenec.adresa }}</td>
+                        <td>
+                            <div class="pojistenci-actions">
+                                <a href="{% url 'detail_pojistence' pojistenec.pk %}">Detail</a>
+                                <a href="{% url 'upravit_pojistence' pojistenec.pk %}">Upravit</a>
+                                <a href="{% url 'smazat_pojistence' pojistenec.pk %}">Smazat</a>
+                            </div>
+                        </td>
+                    </tr>
                 {% endfor %}
-            </ul>
+            </tbody>
+        </table>
 
-            <!-- Paginace -->
-            <div class="pagination">
-                <span class="step-links">
-                    {% if page_obj.has_previous %}
-                        <a href="?page=1">&laquo; První</a>
-                        <a href="?page={{ page_obj.previous_page_number }}">Předchozí</a>
-                    {% endif %}
+        <!-- Paginace -->
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; První</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">Předchozí</a>
+                {% endif %}
 
-                    <span class="current">
-                        Stránka {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
-                    </span>
-
-                    {% if page_obj.has_next %}
-                        <a href="?page={{ page_obj.next_page_number }}">Další</a>
-                        <a href="?page={{ page_obj.paginator.num_pages }}">Poslední &raquo;</a>
-                    {% endif %}
+                <span class="current">
+                    Stránka {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
                 </span>
-            </div>
 
-        {% else %}
-            <p>Žádní pojištěnci nenalezeni.</p>
-        {% endif %}
-    </div>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Další</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">Poslední &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+
+    {% else %}
+        <p>Žádní pojištěnci nenalezeni.</p>
+    {% endif %}
+</div>
 
 {% endblock %}
+
 

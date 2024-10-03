@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+
+{% block title %}Zapomenuté heslo{% endblock %}
+
+{% block content %}
+<div class="container_zampomenute_heslo">
+    <h2>Zapomenuté heslo</h2>
+    
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Odeslat e-mail pro obnovení hesla</button>
+    </form>
+    <p>Již máte účet? <a href="{% url 'prihlaseni' %}">Přihlaste se zde</a>.</p>
+</div>
+{% endblock %}

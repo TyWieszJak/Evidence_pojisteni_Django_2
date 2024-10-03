@@ -25,12 +25,18 @@
                     <ul class="nav-links">
                         <li><a href="{% url 'seznam_pojistencu' %}">Pojištěnci</a></li>
                         <li><a href="{% url 'seznam_pojisteni'%}">Pojištění</a></li>
+                        <li><a href="{% url 'seznam_pojistnych_udalosti' %}">Pojistné události</a></li>
                     </ul>
                 </nav>
 
                 <!-- Přihlašovací odkazy -->
                 <div class="auth-links">
-                    <a href="{% url 'prihlaseni' %}">Přihlášení</a>
+                    {% if user.is_authenticated %}
+                    <span>Uživatel: {{ user.username }}</span> <!-- Zobrazení uživatelského jména -->
+                    <a href="{% url 'odhlasit' %}" class="btn-odhlasit">Odhlásit</a> <!-- Odkaz na odhlášení -->
+                {% else %}
+                    <a href="{% url 'prihlaseni' %}"class="btn-prihlasit">Přihlášení</a> <!-- Odkaz na přihlášení -->
+                {% endif %}
                 </div>
             </div>
         </header>
@@ -52,6 +58,10 @@
                         <div class="action-box">
                             <h3>Pojištění</h3>
                             <a href="{% url 'seznam_pojisteni' %}" class="btn btn-primary">Jít na seznam pojištění</a>
+                        </div>
+                        <div class="action-box">
+                            <h3>Pojistné události</h3>
+                            <a href="{% url 'seznam_pojistnych_udalosti' %}" class="btn btn-primary">Jít na seznam pojistných událostí</a> <!-- Přidaný odkaz -->
                         </div>
                         <!-- Přidej další akce podle potřeby -->
                     </div>

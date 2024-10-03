@@ -1,0 +1,15 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Detail pojištění</h1>
+    
+    <h2>{{ pojisteni.nazev }}</h2>
+    <p><strong>Typ pojištění:</strong> {{ pojisteni.typ }}</p>
+    <p><strong>Predmet pojištění:</strong> {{ pojisteni.predmet_pojisteni }}</p>
+    <p><strong>Datum sjednání:</strong> {{ pojisteni.datum_sjednani }}</p>
+    <p><strong>Částka pojistného:</strong> {{ pojisteni.castka }}</p>
+    
+    <a href="{% url 'seznam_pojisteni' %}" class="btn btn-primary">Zpět na seznam pojištění</a>
+</div>
+{% endblock %}

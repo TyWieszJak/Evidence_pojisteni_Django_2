@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}Přidat Pojistnou Událost{% endblock %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'css/pridat_udalost.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container-pridat">
+    <h2>Přidat Pojistnou Událost</h2>
+    
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Přidat událost</button>
+    </form>
+</div>
+{% endblock %}
