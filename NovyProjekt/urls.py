@@ -37,4 +37,5 @@ urlpatterns = [
 
     path('admin-only/', views.pouze_administrator, name='admin_only'),
     path('insured-only/', views.pouze_uzivatel, name='insured_only'),
+
 ]
