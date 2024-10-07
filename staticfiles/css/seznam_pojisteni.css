@@ -1,0 +1,161 @@
+/* Reset základních stylů */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Hlavní kontejner pro stránky */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+/* Hlavní kontejner pro obsah */
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Styl hlavičky */
+header {
+    background-color: #4CAF50; /* Zelená barva */
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo */
+.logo {
+    flex: 0 1 auto;
+}
+
+.logo-img {
+    max-height: 50px;
+}
+
+/* Navigace a přihlašování */
+nav {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* Přihlašovací odkazy */
+.auth-links {
+    margin-left: 20px;
+}
+
+.auth-links a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Styl hlavního obsahu */
+main {
+    flex: 1;
+    padding: 20px 0;
+}
+
+main > .container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Styl formuláře */
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Styl seznamu pojištění */
+.pojisteni-list {
+    list-style: none;
+    padding: 0;
+}
+
+.pojisteni-list li {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pojisteni-list a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.pojisteni-list a:hover {
+    text-decoration: underline;
+}
+
+/* Styl patičky */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center

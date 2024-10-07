@@ -1,0 +1,155 @@
+/* Reset základních stylů */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Hlavní kontejner pro stránky */
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Styl hlavičky */
+header {
+    background-color: #4CAF50; /* Zelená barva */
+    color: white;
+    padding: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Měkký stín pro hlavičku */
+    min-height: 70px; /* Minimální výška pro konzistentní zobrazení */
+}
+
+.logo img {
+    max-height: 50px;
+}
+
+/* Navigace: Pojištěnci a Pojištění uprostřed */
+nav {
+    flex-grow: 1;
+    text-align: center; /* Zarovná odkazy do středu */
+}
+
+.nav-links {
+    list-style: none;
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-right: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #E8F5E9;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Přihlášení: Zůstane vpravo */
+.auth-links {
+    margin-left: 20px;
+}
+
+.auth-links a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.auth-links a:hover {
+    color: #E8F5E9;
+}
+
+/* Styl hlavního obsahu */
+main {
+    padding: 20px 0;
+}
+
+h1 {
+    margin-bottom: 30px; /* Větší mezera pod nadpisem */
+}
+
+/* Formulář */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 30px; /* Větší mezera mezi poli formuláře */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+}
+
+/* Zelený rámeček při zaostření */
+input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Tlačítko */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px; /* Větší mezera mezi tlačítky */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Speciální styl pro souborový input */
+input[type="file"] {
+    margin-bottom: 20px; /* Větší mezera pod souborovým inputem */
+}
+
+button[type="submit"] {
+    margin-top: 30px; /* Větší mezera nad tlačítkem Přidat pojištěnce */
+}
+
+/* Styl patičky */
+footer {
+    background-color: #000; /* Černá barva */
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 0.9em;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

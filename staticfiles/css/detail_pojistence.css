@@ -1,0 +1,70 @@
+/* Obecné styly */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #f4f4f4;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo-img {
+    height: 50px;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    display: inline;
+    margin-right: 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+}
+
+.auth-links a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+main {
+    padding: 20px 0;
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+.photo {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 20px 0;
+}
+
+.actions a {
+    text-decoration: none;
+    color: #007BFF;
+    margin-right: 10px;
+}
+
+footer {
+    background-color: #f4f4f4;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
