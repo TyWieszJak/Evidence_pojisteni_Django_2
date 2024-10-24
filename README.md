@@ -13,10 +13,6 @@ Tento projekt je webová aplikace postavená na frameworku Django, určená k ev
 - **HTML/CSS** pro uživatelské rozhraní
 - **SQLite** databáze (možná změna na jiný DB systém)
 
-## Jak spustit projekt:
-1. Klonujte repozitář: `git clone https://github.com/TyWieszJak/Evidence_pojisteni_Django_2.git`
-2. Nainstalujte závislosti: `pip install -r requirements.txt`
-3. Spusťte server: `python manage.py runserver`
 
 ## Budoucí plány:
 - Implementace pokročilého vyhledávání v pojištěních
