@@ -2,6 +2,8 @@
 
 Tento projekt je webová aplikace postavená na frameworku Django, určená k evidenci pojištění a spravování údajů pojištěnců.
 
+https://evidence.pythonanywhere.com/ - fungující aplikace.
+
 ## Funkce:
 - Správa pojištěnců (CRUD operace: přidání, úprava, mazání)
 - Správa pojistných událostí
