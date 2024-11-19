@@ -1,10 +1,10 @@
 .container-detail {
     display: flex;
     align-items: flex-start;
-    justify-content: center; /* Center the content horizontally */
+    justify-content: center;
     flex-wrap: wrap;
     padding: 20px;
-    margin: 0 auto; /* Center the container horizontally */
+    margin: 0 auto;
 }
 
 

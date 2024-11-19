@@ -97,7 +97,7 @@ td .action-btn {
     margin-right: 10px;
     display: inline-block;
     border: 1px solid #007bff;
-    background-color: white;
+    background-color: #f1f1f1;
     color: #007bff;
     transition: background-color 0.3s, color 0.3s;
 }
@@ -113,14 +113,14 @@ td .delete-btn {
 /* Hover efekty pro tlačítka */
 td .edit-btn:hover {
     background-color: #ffa500; /* Oranžová barva */
-    color: white;
-    border-color: #ffa500;
+    border: 1px solid #007bff;
+    color:white
 }
 
 td .delete-btn:hover {
     background-color: #dc3545; /* Červená barva */
+    border: 1px solid #007bff;
     color: white;
-    border-color: #dc3545;
 }
 
 /* Mezera mezi řádky */
