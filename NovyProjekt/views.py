@@ -97,6 +97,7 @@ def pridat_pojisteni(request, pk):
     if request.method == "POST":
         form = PridaniForm(request.POST)
         if form.is_valid():
+            print(form.cleaned_data)
             pojisteni = form.save(commit=False)
             pojisteni.pojistenec = pojistenec
             pojisteni.save()
@@ -212,6 +213,9 @@ def pridat_pojistence(request):
         form = PojistenecForm(request.POST,request.FILES)
         if form.is_valid():
             print("Formulář je validní")
+            pojistenec = form.save(commit=False)
+            pojistenec.user = request.user  # Zde přiřazujeme přihlášeného uživatele
+            pojistenec.save()
             form.save()
             return redirect('seznam_pojistencu')
         else:

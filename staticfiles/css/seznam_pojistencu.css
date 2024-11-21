@@ -1,66 +1,171 @@
-/* Styl kontejneru */
-.container {
-    margin: 20px auto;
-    max-width: 800px;
-    padding: 20px;
+.container-seznam_pojistenci {
+    width: 100%;
+    max-width: 800px; /* Maximální šířka kontejneru */
+    margin: 20px auto; /* Centrovat kontejner */
+    padding: 30px;
+    background-color: #f9f9f9; /* Světle šedé pozadí */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Nadpis */
-h1 {
+h2 ,h1{
     text-align: center;
-    margin-bottom: 20px;
-    font-size: 2em;
-    color: #003d7a;
-}
-
-/* Tlačítko pro přidání pojištěnce */
-.btn {
-    display: inline-block;
-    background-color: #007bff;
-    color: white;
-    padding: 12px 24px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
+    color: #007bff; /* Barva nadpisu */
     margin-bottom: 20px;
 }
 
-.btn:hover {
-    background-color: #0056b3;
-    color: #fff;
+table {
+    width: 100%; /* Tabulka zabírá celou šířku kontejneru */
+    border-collapse: collapse; /* Sloučit okraje buněk */
+    margin-top: 20px;
 }
 
-/* Styl seznamu pojištěnců */
-.pojistenci-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.pojistenci-list li {
-    background-color: #f8f9fa;
-    margin-bottom: 10px;
+table th, table td {
     padding: 15px;
-    border: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: left; /* Zarovnat text vlevo */
+    border-bottom: 1px solid #ddd; /* Spodní okraj buněk */
 }
 
-/* Akce pojištěnce (upravit, smazat) */
+/* Zarovnání nadpisu "Akce" více doprava v záhlaví tabulky */
+th:last-child {
+    text-align: center; /* Zarovnání nadpisu doprava */
+    padding-right: 20px; /* Přidání odsazení od pravého okraje */
+}
+
+
+table th {
+    background-color: #007bff; /* Barva hlavičky tabulky */
+    color: white; /* Barva textu hlavičky */
+}
+
+table tr:hover {
+    background-color: #f1f1f1; /* Barva řádku při hoveru */
+}
+
 .pojistenci-actions {
-    display: inline-flex;
-    gap: 10px;
+    text-align: right; /* Zarovnání tlačítek doprava */
 }
 
 .pojistenci-actions a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
+    display: inline-block;
+    padding: 8px 16px; /* Menší padding pro decentní vzhled */
+    margin: 0 5px; /* Mezera mezi tlačítky */
+    text-decoration: none; /* Odstranění podtržení textu */
+    color: #007bff; /* Modrý text */
+    border: 1px solid #007bff; /* Modrý rámeček */
+    border-radius: 4px; /* Mírně zaoblené rohy */
+    transition: all 0.3s ease; /* Hladký přechod pro hover efekt */
 }
 
-.pojistenci-actions a:hover {
-    color: #0056b3;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+/* Efekt hover pro tlačítko "Detail" */
+.pojistenci-actions a:first-child:hover {
+    background-color: #007bff; /* Modré pozadí při najetí myší */
+    color: #fff; /* Bílé písmo při hoveru */
 }
+
+/* Efekt hover pro tlačítko "Upravit" */
+.pojistenci-actions a:nth-child(2):hover {
+    background-color: #ff851b; /* Oranžové pozadí při najetí myší */
+    color: #fff; /* Bílé písmo při hoveru */
+}
+
+/* Efekt hover pro tlačítko "Smazat" */
+.pojistenci-actions a:last-child:hover {
+    background-color: #c9302c; /* Červené pozadí při najetí myší */
+    color: #fff; /* Bílé písmo při hoveru */
+}
+
+
+/* Základní styly pro paginaci */
+.pagination {
+    display: flex;
+    justify-content: center; /* Centrovat paginaci */
+    margin: 20px 0; /* Horní a dolní odsazení */
+    font-size: 16px; /* Velikost písma */
+}
+
+.step-links a {
+    text-decoration: none; /* Odstranit podtržení z odkazů */
+    padding: 8px 12px; /* Odsazení kolem odkazů */
+    margin: 0 5px; /* Mezera mezi odkazy */
+    border: 1px solid #007bff; /* Barva okraje */
+    border-radius: 4px; /* Zaoblené rohy */
+    color: #007bff; /* Barva odkazu */
+    transition: background-color 0.3s, color 0.3s; /* Přechod pro hover efekty */
+}
+
+.step-links a:hover {
+    background-color: #007bff; /* Barva pozadí při hoveru */
+    color: #fff; /* Barva textu při hoveru */
+}
+
+.current {
+    padding: 8px 12px; /* Odsazení kolem indikátoru aktuální stránky */
+    margin: 0 5px; /* Mezera */
+    font-weight: bold; /* Zvýraznit aktuální stránku */
+    color: #555; /* Barva pro aktuální stránku */
+    border-radius: 4px; /* Zaoblené rohy */
+}
+
+/* Styly pro tlačítka "Upravit" a "Smazat" */
+.pojistenci-actions a:active {
+    transform: translateY(2px); /* Efekt stlačení při kliknutí */
+}
+
+.btn {
+    display: inline-block; /* Umožní nastavit padding a margin */
+    padding: 10px 20px; /* Vnitřní odstup kolem textu */
+    background-color: #007bff; /* Modré pozadí */
+    color: white; /* Bílé písmo */
+    border: none; /* Bez okraje */
+    border-radius: 5px; /* Zaoblení rohů */
+    text-align: center; /* Zarovnat text na střed */
+    text-decoration: none; /* Bez podtržení */
+    font-size: 16px; /* Velikost písma */
+    transition: background-color 0.3s, transform 0.2s; /* Plynulé změny při hoveru */
+    cursor: pointer; /* Změna kurzoru na ruku */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Tmavší modrá při hoveru */
+    transform: scale(1.05); /* Zvýšení velikosti tlačítka při hoveru */
+}
+
+.btn:active {
+    transform: scale(0.95); /* Efekt stlačení při kliknutí */
+}
+
+/* Styl pro formulář vyhledávání */
+.vyhledavaci-form {
+    display: inline-flex; /* Umožňuje umístit elementy vedle sebe */
+    align-items: center; /* Vertikální zarovnání elementů */
+    margin-left: 200px; /* Pravý okraj */
+
+}
+
+.vyhledavaci-form label {
+    margin-right: 10px; /* Odstup mezi štítkem a vstupem */
+}
+
+.vyhledavaci-form input {
+    padding: 10px; /* Vnitřní okraje pro vstup */
+    border: 1px solid #ddd; /* Barva okraje */
+    border-radius: 5px; /* Zaoblené rohy */
+    font-size: 16px; /* Velikost písma */
+    margin-right: 10px; /* Odstup mezi vstupy */
+}
+
+.vyhledavaci-form button[type="submit"] {
+    padding: 10px 15px; /* Vnitřní okraje pro tlačítko */
+    background-color: #007bff; /* Modré pozadí */
+    color: white; /* Barva textu */
+    border: none; /* Bez okraje */
+    border-radius: 5px; /* Zaoblené rohy */
+    font-size: 16px; /* Velikost písma */
+    cursor: pointer; /* Ukazatel myši na ruku */
+}
+
+.vyhledavaci-form button[type="submit"]:hover {
+    background-color: #0056b3; /* Tmavší modrá při hoveru */
+}
+

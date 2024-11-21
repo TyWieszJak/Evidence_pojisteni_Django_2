@@ -1,148 +1,164 @@
-/* Reset základních stylů */
-* {
+/* Resetování základního stylování */
+body, h1, p {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
-nav {
-    flex: 1; /* Flex: 1 umožňuje navigaci vyplnit prostor mezi logem a přihlašovacím odkazem */
-    text-align: center; /* Zarovná odkazy do středu */
+html, body {
+    height: 100%; /* Zajištění, že tělo zabírá 100% výšky */
+    margin: 0; /* Odstranění výchozího okraje */
 }
 
-/* Hlavní kontejner pro stránky */
+/* Základní stylování pro tělo */
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
-/* Styl hlavičky */
+/* Hlavička */
 header {
-    background-color: #003d7a; /* Tmavě modrá */
+    background-color: #007bff; /* Modrá barva */
     color: white;
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Rozložení mezi logem, navigací a přihlašovacím odkazem */
-    position: relative; /* Umožní umístění přihlašovacího odkazu absolutně */
+    padding: 10px 20px;
+    position: relative;
 }
 
-/* Logo */
-.logo {
-    flex: 1; /* Flex: 1 umožňuje logu zabírat potřebné místo */
+header .container {
+    display: flex;
+    justify-content: space-between; /* Pro rozložení loga a autentizačních odkazů */
+    align-items: center; /* Vycentrování vertikálně */
 }
 
 .logo img {
-    max-height: 500px; /* Výška loga */
+    height: 50px; /* Výška loga */
 }
 
-/* Navigace: Pojištěnci a Pojištění uprostřed */
 nav {
-    flex: 1; /* Flex: 1 umožňuje navigaci vyplnit prostor mezi logem a přihlašovacím odkazem */
-    text-align: center; /* Zarovná odkazy do středu */
+    flex-grow: 1; /* Umožní nav zaujmout dostupný prostor */
+    text-align: center; /* Vycentrování obsahu uvnitř nav */
 }
 
 .nav-links {
-    list-style: none;
-    display: inline-flex;
-    margin: 0;
+    list-style-type: none;
     padding: 0;
+    margin: 0;
+    display: inline-flex; /* Použití inline-flex pro horizontální zarovnání */
 }
 
 .nav-links li {
-    margin-right: 20px;
+    margin: 0 15px; /* Větší mezery mezi odkazy */
 }
 
 .nav-links a {
-    text-decoration: none;
     color: white;
+    text-decoration: none;
     font-weight: bold;
-    font-size: 16px;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.nav-links a:hover {
-    color: #e8f5e9; /* Světlejší modrá pro hover efekt */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-/* Přihlášení: V pravém horním rohu */
 .auth-links {
-    position: absolute; /* Pozice absolutně, aby se přihlašovací odkaz umístil na pravý okraj */
-    right: 20px; /* Vzdálenost od pravého okraje */
-    top: 50%; /* Vertikální zarovnání */
-    transform: translateY(-50%); /* Úprava pro správné vertikální umístění */
+    box-sizing: border-box;
+    padding: 10px; /* Přidání paddingu */
+    border-left: 1px solid white; /* Rámeček na levé straně */
+    margin-left: 20px; /* Oddělení od navigačních odkazů */
 }
 
-.auth-links a {
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 16px;
+/* Styly pro tlačítka */
+.btn {
+    display: inline-block; /* Blokový prvek */
+    padding: 10px 15px; /* Vnitřní okraje */
+    color: white; /* Barva textu */
+    background-color: #007bff; /* Barva pozadí */
+    border: none; /* Bez okraje */
+    border-radius: 5px; /* Zaoblení rohů */
+    text-decoration: none; /* Bez podtržení */
+    transition: background-color 0.3s; /* Přechod pro barvu pozadí */
 }
 
-.auth-links a:hover {
-    color: #e8f5e9; /* Světlejší modrá pro hover efekt */
+.btn:hover {
+    background-color: #0056b3; /* Barva pozadí při najetí myší */
 }
 
-/* Styl hlavního obsahu */
+/* Tlačítko odhlášení */
+.btn-odhlasit {
+    display: inline-block; /* Umožní používat padding a margin */
+    padding: 2px 4px; /* Přidání paddingu */
+    color: white; /* Barva textu */
+    background-color: #dc3545; /* Červená barva pro nebezpečné akce */
+    text-decoration: none; /* Odstranění podtržení */
+    border-radius: 5px; /* Zaoblení rohů */
+    font-weight: bold; /* Zvýraznění textu */
+    transition: background-color 0.3s ease; /* Hladký přechod pro hover efekt */
+}
+
+.btn-odhlasit:hover {
+    background-color: #c82333; /* Tmavší červená při hoveru */
+}
+
+/* Tlačítko přihlášení */
+.btn-prihlasit {
+    display: inline-block; /* Umožní používat padding a margin */
+    padding: 10px 20px; /* Přidání paddingu */
+    color: white; /* Barva textu */
+    background-color: #007bff; /* Modrá barva pro přihlašovací akci */
+    text-decoration: none; /* Odstranění podtržení */
+    border-radius: 5px; /* Zaoblení rohů */
+    font-weight: bold; /* Zvýraznění textu */
+    transition: background-color 0.3s ease; /* Hladký přechod pro hover efekt */
+}
+
+.btn-prihlasit:hover {
+    background-color: #0056b3; /* Tmavší modrá při hoveru */
+}
+
+/* Hlavní obsah */
 main {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 0;
+    padding: 20px;
 }
 
-h1 {
-    margin-bottom: 20px;
+.main-actions {
+    display: flex; /* Flexbox pro horizontální rozložení */
+    justify-content: space-around; /* Vytvoří prostor mezi akcemi */
+    flex-wrap: wrap; /* Umožní zalamování na novou řadu */
+    margin-top: 20px; /* Odstup nad akcemi */
 }
 
-p {
-    margin-bottom: 20px;
+.action-box {
+    background-color: #f0f0f0; /* Barva pozadí */
+    border: 1px solid #ccc; /* Okraj */
+    border-radius: 8px; /* Zaoblení rohů */
+    padding: 20px; /* Vnitřní okraje */
+    margin: 10px; /* Vnější okraje */
+    flex: 1; /* Flexibilní šířka */
+    min-width: 200px; /* Minimální šířka boxu */
+    text-align: center; /* Vycentrování textu */
 }
 
-/* Styl čtverců */
-.squares-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+.action-box h3 {
+    margin-bottom: 15px;
 }
 
-.square {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 200px; /* Šířka čtverců */
-    height: 200px; /* Výška čtverců */
-    border-radius: 8px;
-    color: #333;
-    font-size: 18px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-}
-
-.square a {
-    color: inherit;
-    text-decoration: none;
-}
-.square:hover {
-    background-color: #0056b3; /* Tmavší zelená barva při najetí myší */
-    color: white; /* Bílý text při najetí myší */
-    transform: scale(1.05); /* Mírné zvětšení čtverce při najetí myší */
-    cursor: pointer; /* Ukazatel myši změní na ruku */
-}
-
-/* Styl patičky */
+/* Spodní lišta */
 footer {
-    background-color: #000; /* Černá barva */
+    background-color: black;
     color: white;
-    padding: 10px 0;
     text-align: center;
-    font-size: 0.9em;
-    position: relative;
+    padding: 10px 0;
+    bottom: 0;
     width: 100%;
+}
+
+footer .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Minimální výška wrapperu je 100% výšky okna */
+}
+
+.content {
+    flex: 1; /* Obsah zabere zbytek dostupného místa */
 }
