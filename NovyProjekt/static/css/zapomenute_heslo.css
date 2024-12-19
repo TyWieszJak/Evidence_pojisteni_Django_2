@@ -1,38 +1,36 @@
-/* prihlaseni.css */
+/* zapomenute_heslo.css */
 
-/* Kontejner pro přihlášení */
-.container-prihlaseni {
+/* Kontejner pro zapomenuté heslo */
+.container_zapomenute_heslo {
     max-width: 400px; /* Maximální šířka kontejneru */
     margin: 50px auto; /* Vycentrování */
     padding: 40px 70px 20px 60px; /* Vnitřní odsazení */
-    background-color: #f9f9f9; /* Světle šedé pozadí */
+    background-color: #fefefe; /* Světlejší pozadí */
     border-radius: 8px; /* Zaoblení rohů */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Jemný stín pro 3D efekt */
+    border: 1px solid #ddd; /* Lehký rámeček */
 }
 
 /* Nadpis */
-.container-prihlaseni h2 {
+.container_zapomenute_heslo h2 {
     text-align: center; /* Zarovnání na střed */
-    color: #333; /* Tmavě šedá barva textu */
+    color: #444; /* Tmavě šedá barva textu */
     margin-bottom: 20px; /* Mezery pod nadpisem */
-}
-
-/* Skupina formuláře */
-.form-group {
-    margin-bottom: 15px; /* Mezery mezi formulářovými skupinami */
+    font-weight: bold; /* Tučnější text */
 }
 
 /* Styl pro formulářová pole */
-input[type="text"], input[type="password"] {
-    width: 100%; /* Šířka 100% */
-    padding: 10px; /* Vnitřní odsazení */
+input[type="email"] {
+    width: 20%;
+    padding: 5px; /* Vnitřní odsazení */
+    margin-bottom: 20px;
     border: 2px solid #007bff; /* Modrý rámeček */
     border-radius: 6px; /* Zaoblení rohů */
     transition: border-color 0.3s ease; /* Plynulý přechod pro změnu barvy rámečku */
 }
 
 /* Změna barvy při zaostření */
-input[type="text"]:focus, input[type="password"]:focus {
+input[type="email"]:focus {
     border-color: #0056b3; /* Tmavě modrá barva při zaostření */
     outline: none; /* Zrušení standardního rámečku */
 }
@@ -41,6 +39,7 @@ input[type="text"]:focus, input[type="password"]:focus {
 button.btn {
     padding: 10px 20px; /* Odsazení pro tlačítko */
     background-color: #007bff; /* Modré pozadí */
+    margin-bottom: 20px;
     color: white; /* Bílá barva textu */
     font-size: 1em; /* Velikost písma */
     font-weight: bold; /* Tlustý text */
@@ -56,18 +55,18 @@ button.btn:hover {
 }
 
 /* Styl pro odkazy */
-.odkazy {
+.container_zapomenute_heslo p {
     text-align: center; /* Zarovnání na střed */
-    margin-top: 20px; /* Mezery nahoře */
+    margin: 20px; /* Mezery nahoře */
+    color: #555; /* Neutrální šedá */
+    font-size: 14px; /* Menší písmo */
 }
 
-.odkazy a {
-    display: block; /* Odkazy v novém bloku */
+.container_zapomenute_heslo p a {
     color: #007bff; /* Modrá barva */
     text-decoration: none; /* Bez podtržení */
-    margin-top: 10px; /* Mezery mezi odkazy */
 }
 
-.odkazy a:hover {
+.container_zapomenute_heslo p a:hover {
     text-decoration: underline; /* Podtržení při najetí myší */
 }

@@ -1,5 +1,8 @@
 {% extends 'index.html' %}
-
+{% load static %}
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'css/zapomenute_heslo.css' %}">
+{% endblock %}
 {% block title %}Zapomenuté heslo{% endblock %}
 
 {% block content %}

@@ -1,38 +1,41 @@
-/* prihlaseni.css */
+/* registrace.css */
 
-/* Kontejner pro přihlášení */
-.container-prihlaseni {
+/* Kontejner pro registraci */
+.container-registrace {
     max-width: 400px; /* Maximální šířka kontejneru */
     margin: 50px auto; /* Vycentrování */
     padding: 40px 70px 20px 60px; /* Vnitřní odsazení */
-    background-color: #f9f9f9; /* Světle šedé pozadí */
+    background-color: #fefefe; /* Světlejší pozadí pro odlišení */
     border-radius: 8px; /* Zaoblení rohů */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Jemný stín pro 3D efekt */
+    border: 1px solid #ddd; /* Lehký rámeček */
 }
 
 /* Nadpis */
-.container-prihlaseni h2 {
+.container-registrace h2 {
     text-align: center; /* Zarovnání na střed */
-    color: #333; /* Tmavě šedá barva textu */
+    color: #444; /* Tmavě šedá barva textu */
     margin-bottom: 20px; /* Mezery pod nadpisem */
+    font-weight: bold; /* Tučnější text */
 }
 
-/* Skupina formuláře */
+/* Formulářová skupina */
 .form-group {
-    margin-bottom: 15px; /* Mezery mezi formulářovými skupinami */
+    margin-bottom: 15px; /* Mezery mezi skupinami */
 }
 
 /* Styl pro formulářová pole */
-input[type="text"], input[type="password"] {
-    width: 100%; /* Šířka 100% */
-    padding: 10px; /* Vnitřní odsazení */
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 20%; /* Šířka 100% */
+    padding: 5px; /* Vnitřní odsazení */
+    margin: 5px;
     border: 2px solid #007bff; /* Modrý rámeček */
     border-radius: 6px; /* Zaoblení rohů */
     transition: border-color 0.3s ease; /* Plynulý přechod pro změnu barvy rámečku */
 }
 
 /* Změna barvy při zaostření */
-input[type="text"]:focus, input[type="password"]:focus {
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
     border-color: #0056b3; /* Tmavě modrá barva při zaostření */
     outline: none; /* Zrušení standardního rámečku */
 }
@@ -40,6 +43,7 @@ input[type="text"]:focus, input[type="password"]:focus {
 /* Styl tlačítka pro odeslání */
 button.btn {
     padding: 10px 20px; /* Odsazení pro tlačítko */
+    margin: 10px;
     background-color: #007bff; /* Modré pozadí */
     color: white; /* Bílá barva textu */
     font-size: 1em; /* Velikost písma */
@@ -62,7 +66,6 @@ button.btn:hover {
 }
 
 .odkazy a {
-    display: block; /* Odkazy v novém bloku */
     color: #007bff; /* Modrá barva */
     text-decoration: none; /* Bez podtržení */
     margin-top: 10px; /* Mezery mezi odkazy */
@@ -70,4 +73,12 @@ button.btn:hover {
 
 .odkazy a:hover {
     text-decoration: underline; /* Podtržení při najetí myší */
+}
+
+/* Styl pro informace pod formulářem */
+.container-registrace p {
+    text-align: center; /* Zarovnání na střed */
+    color: #555; /* Neutrální šedá */
+    margin-top: 15px; /* Mezery nahoře */
+    font-size: 14px; /* Menší písmo */
 }
