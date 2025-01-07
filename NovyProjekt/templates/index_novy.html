@@ -1,0 +1,83 @@
+
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Domovská stránka{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    {% block extra_styles %}{% endblock %}
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="container">
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo-img">
+                    </a>
+                </div>
+
+                <!-- Navigační odkazy -->
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="{% url 'seznam_pojistencu' %}">POJIŠTENCI</a></li>
+                        <li><a href="{% url 'seznam_pojisteni'%}">POJIŠTENI</a></li>
+                        <li><a href="{% url 'seznam_pojistnych_udalosti' %}">POJIISTNE UDALOSTI </a></li>
+                    </ul>
+                </nav>
+
+                <!-- Přihlašovací odkazy -->
+                <div class="auth-links">
+                    {% if user.is_authenticated %}
+                    <span>Uživatel: {{ user.username }}</span> <!-- Zobrazení uživatelského jména -->
+                    <a href="{% url 'odhlasit' %}" class="btn-odhlasit">Odhlásit</a> <!-- Odkaz na odhlášení -->
+                {% else %}
+                    <a href="{% url 'prihlaseni' %}"class="btn-prihlasit">Přihlášení</a> <!-- Odkaz na přihlášení -->
+                {% endif %}
+                </div>
+            </div>
+        </header>
+
+        <!-- Hlavní obsah -->
+        <main>
+        <div class="content">
+            {% block content %}
+                <div class="container" style="text-align: center;">
+                    <h1>Vítejte na naší aplikaci</h1>
+                    <p>Spravujte své pojištěnce a pojištění rychle a jednoduše.</p>
+
+                    <!-- Čtverce pro akce -->
+                    <div class="main-actions">
+                        <div class="action-box">
+                            <h3>Pojištěnci</h3>
+                            <a href="{% url 'seznam_pojistencu'  %}" class="btn btn-primary">Jít na seznam pojištěnců</a>
+                        </div>
+                        <div class="action-box">
+                            <h3>Pojištění</h3>
+                            <a href="{% url 'seznam_pojisteni' %}" class="btn btn-primary">Jít na seznam pojištění</a>
+                        </div>
+                        <div class="action-box">
+                            <h3>Pojistné události</h3>
+                            <a href="{% url 'seznam_pojistnych_udalosti' %}" class="btn btn-primary">Jít na seznam pojistných událostí</a> <!-- Přidaný odkaz -->
+                        </div>
+                        <!-- Přidej další akce podle potřeby -->
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+        </main>
+
+        <!-- Spodní lišta -->
+        <footer>
+            <div class="container">
+                <p>&copy; 2024 Moje Aplikace</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

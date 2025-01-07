@@ -1,6 +1,20 @@
 # forms.py
 from django import forms
-from .models import Pojistenec, Pojisteni,PojistnaUdalost
+from .models import Pojistenec, Pojisteni,PojistnaUdalost, Uzivatel
+
+
+class UzivatelForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+    class Meta:
+        model = Uzivatel
+        fields = ['first_name', 'last_name', 'email', 'password']
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data['password'])  # Hashování hesla
+        if commit:
+            user.save()
+        return user
 
 class PojistenecForm(forms.ModelForm):
     class Meta:

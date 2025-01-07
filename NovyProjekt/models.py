@@ -5,16 +5,17 @@ from django.utils import timezone
 
 # Vlastní správa uživatelů
 class UzivatelManager(BaseUserManager):
-    def create_user(self, email, password=None):
+    def create_user(self, email, first_name, last_name, password=None):
         if not email:
             raise ValueError("Uživatel musí mít emailovou adresu.")
-        user = self.model(email=self.normalize_email(email))
+        email = self.normalize_email(email)
+        user = self.model(email=email, first_name=first_name, last_name=last_name)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password=None):
-        user = self.create_user(email, password)
+    def create_superuser(self, email, first_name, last_name, password=None):
+        user = self.create_user(email, first_name, last_name, password)
         user.is_admin = True
         user.save(using=self._db)
         return user
@@ -22,8 +23,9 @@ class UzivatelManager(BaseUserManager):
 
 # Vlastní model uživatele
 class Uzivatel(AbstractBaseUser):
+    first_name = models.CharField(max_length=50, default="")
+    last_name = models.CharField(max_length=50, default="")
     email = models.EmailField(max_length=300, unique=True)
-    password = models.CharField(max_length=100)
     is_admin = models.BooleanField(default=False)
     last_login = models.DateTimeField(default=timezone.now)
     date_joined = models.DateTimeField(default=timezone.now)
@@ -31,10 +33,10 @@ class Uzivatel(AbstractBaseUser):
     objects = UzivatelManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['password']
+    REQUIRED_FIELDS = ['first_name', 'last_name']  # Uživatelské jméno je email, takže ho neuvádíme v REQUIRED_FIELDS
 
     def __str__(self):
-        return self.email
+        return f'{self.first_name} {self.last_name}'
 
     @property
     def is_staff(self):

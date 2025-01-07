@@ -1,81 +1,90 @@
-
 <!DOCTYPE html>
-{% load static %}
 <html lang="cs">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Domovská stránka{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/novy_index.css' %}">
     {% block extra_styles %}{% endblock %}
+    <style>
+
+    </style>
 </head>
 <body>
-    <div class="wrapper">
-        <header>
-            <div class="container">
-                <!-- Logo -->
+    <header>
+        <div class="container">
+            <div class="header-content">
                 <div class="logo">
                     <a href="{% url 'index' %}">
-                        <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo-img">
+                        <img src="{% static 'images/image.png' %}" alt="Logo" class="logo-img">
                     </a>
+                    <span>Moje Aplikace</span>
                 </div>
-
-                <!-- Navigační odkazy -->
-                <nav>
-                    <ul class="nav-links">
-                        <li><a href="{% url 'seznam_pojistencu' %}">POJIŠTENCI</a></li>
-                        <li><a href="{% url 'seznam_pojisteni'%}">POJIŠTENI</a></li>
-                        <li><a href="{% url 'seznam_pojistnych_udalosti' %}">POJIISTNE UDALOSTI</a></li>
-                    </ul>
-                </nav>
-
-                <!-- Přihlašovací odkazy -->
-                <div class="auth-links">
-                    {% if user.is_authenticated %}
-                    <span>Uživatel: {{ user.username }}</span> <!-- Zobrazení uživatelského jména -->
-                    <a href="{% url 'odhlasit' %}" class="btn-odhlasit">Odhlásit</a> <!-- Odkaz na odhlášení -->
-                {% else %}
-                    <a href="{% url 'prihlaseni' %}"class="btn-prihlasit">Přihlášení</a> <!-- Odkaz na přihlášení -->
-                {% endif %}
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        {% if user.is_authenticated %}
+                            {{ user.first_name }} ▼
+                        {% else %}
+                            Menu ▼
+                        {% endif %}
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'index' %}">Domů</a>
+                        <a href="{% url 'seznam_pojistencu' %}">Pojištěnci</a>
+                        <a href="{% url 'seznam_pojisteni' %}">Pojištění</a>
+                        <a href="{% url 'seznam_pojistnych_udalosti' %}">Pojistné události</a>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'odhlasit' %}" class="btn-odhlasit">Odhlásit</a> <!-- Odkaz na odhlášení -->
+                        {% else %}
+                            <a href="{% url 'prihlaseni' %}" class="btn-prihlasit">Přihlášení</a> <!-- Odkaz na přihlášení -->
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <!-- Hlavní obsah -->
-        <main>
-        <div class="content">
+    <main>
+        <div class="container">
             {% block content %}
-                <div class="container" style="text-align: center;">
-                    <h1>Vítejte na naší aplikaci</h1>
-                    <p>Spravujte své pojištěnce a pojištění rychle a jednoduše.</p>
+                <h1>Vítejte na naší aplikaci</h1>
+                <p class="intro">Spravujte své pojištěnce a pojištění rychle a jednoduše.</p>
 
-                    <!-- Čtverce pro akce -->
-                    <div class="main-actions">
-                        <div class="action-box">
-                            <h3>Pojištěnci</h3>
-                            <a href="{% url 'seznam_pojistencu'  %}" class="btn btn-primary">Jít na seznam pojištěnců</a>
-                        </div>
-                        <div class="action-box">
-                            <h3>Pojištění</h3>
-                            <a href="{% url 'seznam_pojisteni' %}" class="btn btn-primary">Jít na seznam pojištění</a>
-                        </div>
-                        <div class="action-box">
-                            <h3>Pojistné události</h3>
-                            <a href="{% url 'seznam_pojistnych_udalosti' %}" class="btn btn-primary">Jít na seznam pojistných událostí</a> <!-- Přidaný odkaz -->
-                        </div>
-                        <!-- Přidej další akce podle potřeby -->
+                <div class="central-graphic">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+                        <circle cx="100" cy="100" r="80" fill="none" stroke="#007bff" stroke-width="4" />
+                        <path d="M60,100 Q100,60 140,100 T220,100" fill="none" stroke="#007bff" stroke-width="4" />
+                        <circle cx="100" cy="100" r="15" fill="#007bff" />
+                        <circle cx="60" cy="100" r="10" fill="#007bff" />
+                        <circle cx="140" cy="100" r="10" fill="#007bff" />
+                    </svg>
+                </div>
+
+                <div class="action-boxes">
+                    <div class="action-box">
+                        <h3>Pojištěnci</h3>
+                        <a href="{% url 'seznam_pojistencu'  %}" class="btn">Seznam pojištěnců</a>
+                    </div>
+                    <div class="action-box">
+                        <h3>Pojištění</h3>
+                        <a href="{% url 'seznam_pojisteni' %}" class="btn">Seznam pojištění</a>
+                    </div>
+                    <div class="action-box">
+                        <h3>Pojistné události</h3>
+                        <a href="{% url 'seznam_pojisteni' %}" class="btn">Seznam pojistných událostí</a>
                     </div>
                 </div>
             {% endblock %}
         </div>
-        </main>
+    </main>
 
-        <!-- Spodní lišta -->
-        <footer>
-            <div class="container">
-                <p>&copy; 2024 Moje Aplikace</p>
-            </div>
-        </footer>
-    </div>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Moje Aplikace</p>
+        </div>
+    </footer>
 </body>
 </html>
+
+

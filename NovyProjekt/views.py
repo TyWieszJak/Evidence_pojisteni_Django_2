@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render,get_object_or_404, redirect
 from .models import Pojistenec, Pojisteni, PojistnaUdalost , Uzivatel
-from .forms import PojistenecForm, VyhledavaciForm, PridaniForm, PojistnaUdalostForm
+from .forms import PojistenecForm, VyhledavaciForm, PridaniForm, PojistnaUdalostForm, UzivatelForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import UserCreationForm , AuthenticationForm
 from django.contrib import messages
@@ -284,19 +284,13 @@ def prihlaseni(request):
 
 def registrace(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        role = request.POST.get('role')  # Získání vybrané role z formuláře
+        form = UzivatelForm(request.POST)
         if form.is_valid():
             user = form.save()
-            if role == 'admin':
-                group = Group.objects.get(name='Administrators')
-            else:
-                group = Group.objects.get(name='Insured')
-            user.groups.add(group)  # Přiřazení uživatele do skupiny
             messages.success(request, 'Účet byl úspěšně vytvořen!')
             return redirect('prihlaseni')  # Přesměrování na stránku pro přihlášení
     else:
-        form = UserCreationForm()
+        form = UzivatelForm()
     return render(request, 'pojistenci/registrace.html', {'form': form})
 
 
