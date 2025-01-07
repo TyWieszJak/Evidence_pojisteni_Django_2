@@ -1,0 +1,144 @@
+.container-detail {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center; /* Center the content horizontally */
+    flex-wrap: wrap;
+    padding: 20px;
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+
+
+.detail-fotografie {
+    flex: 1 0 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 150px;
+}
+
+.detail-fotografie img {
+    height: 300px;
+    max-width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.detail-info-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detail-information ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.no-fotografie {
+    flex: 1 0 40%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}
+
+.detail-header {
+    text-align: center;
+}
+
+.detail-actions {
+    flex: 1 0 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    padding-left: 60px;
+}
+
+.detail-actions a {
+    margin-left: 10px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.detail-actions a:hover {
+    background-color: #0056b3;
+}
+
+.detail-information {
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Center the content */
+    margin: 20px auto; /* Center the container */
+    padding: 20px; /* Padding around the container */
+    background-color: #ffffff; /* White background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border: 1px solid #ddd; /* Light gray border */
+}
+
+.detail-info-wrapper {
+    width: 100%; /* Full width of the parent */
+}
+
+.detail-info-wrapper ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+.detail-info-wrapper li {
+    padding: 10px 0; /* Padding between list items */
+    border-bottom: 1px solid #ddd; /* Bottom border for separation */
+}
+
+.detail-info-wrapper li:last-child {
+    border-bottom: none; /* Remove border from the last item */
+}
+
+.detail-info-wrapper strong {
+    color: #007bff; /* Blue color for labels */
+}
+
+/* Sjednaná pojištění */
+.sjednana-pojisteni {
+    margin-top: 20px; /* Odsazení nad tabulkou - zmenšeno pro posun tabulky výš */
+    width: 100%; /* Full width for the table section */
+}
+
+.sjednana-pojisteni h3 {
+    text-align: center; /* Center the heading */
+}
+
+.sjednana-pojisteni table {
+    width: 100%; /* Plná šířka tabulky */
+    border-collapse: collapse; /* Sloučení okrajů */
+}
+
+.sjednana-pojisteni th,
+.sjednana-pojisteni td {
+    border: 1px solid #ddd; /* Světle šedý okraj */
+    padding: 10px; /* Odsazení v buňkách */
+    text-align: left; /* Zarovnání textu nalevo */
+}
+
+.sjednana-pojisteni th {
+    background-color: #f2f2f2; /* Světle šedé pozadí pro záhlaví */
+}
+
+.sjednana-pojisteni a {
+    color: #007bff; /* Modrá barva pro odkazy */
+    text-decoration: none; /* Bez podtržení */
+}
+
+.sjednana-pojisteni a:hover {
+    text-decoration: underline; /* Podtržení při najetí myší */
+}

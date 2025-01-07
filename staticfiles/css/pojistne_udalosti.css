@@ -1,0 +1,130 @@
+/* pojistne_udalosti.css */
+
+/* Hlavní nadpis */
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #007bff; /* Barva nadpisu */
+}
+
+/* Tlačítko pro přidání události */
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Tabulka */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 1em;
+}
+
+/* Záhlaví tabulky */
+thead {
+    background-color: #007bff;
+    color: white;
+}
+
+thead th {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Řádky tabulky */
+tbody tr {
+    border-bottom: 1px solid #dee2e6;
+    transition: background-color 0.3s;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Buňky tabulky */
+td {
+    padding: 15px;
+    text-align: left;
+}
+
+/* Akce (Upravit, Smazat) */
+td a {
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+
+/* Mezera mezi řádky */
+tbody td {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Stránkování */
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination .step-links a {
+    margin: 0 5px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+.pagination .step-links .current {
+    margin: 0 5px;
+    font-weight: bold;
+}
+
+td .action-btn {
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-right: 10px;
+    display: inline-block;
+    border: 1px solid #007bff;
+    background-color: white;
+    color: #007bff;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+td .edit-btn {
+    border-color: #007bff;
+}
+
+td .delete-btn {
+    border-color: #007bff;
+}
+
+/* Hover efekty pro tlačítka */
+td .edit-btn:hover {
+    background-color: #ffa500; /* Oranžová barva */
+    color: white;
+    border-color: #ffa500;
+}
+
+td .delete-btn:hover {
+    background-color: #dc3545; /* Červená barva */
+    color: white;
+    border-color: #dc3545;
+}
+
+/* Mezera mezi řádky */
+tbody td {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
