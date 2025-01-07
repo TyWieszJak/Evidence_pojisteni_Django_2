@@ -5,7 +5,7 @@ h1 {
     font-size: 2em;
     margin-bottom: 20px;
     text-align: center;
-    color: #007bff; /* Barva nadpisu */
+    color: #007bff;
 }
 
 /* Tlačítko pro přidání události */
@@ -112,13 +112,13 @@ td .delete-btn {
 
 /* Hover efekty pro tlačítka */
 td .edit-btn:hover {
-    background-color: #ffa500; /* Oranžová barva */
+    background-color: #ffa500;
     color: white;
     border-color: #ffa500;
 }
 
 td .delete-btn:hover {
-    background-color: #dc3545; /* Červená barva */
+    background-color: #dc3545;
     color: white;
     border-color: #dc3545;
 }

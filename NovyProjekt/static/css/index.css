@@ -4,8 +4,8 @@ body, h1, p {
     padding: 0;
 }
 html, body {
-    height: 100%; /* Zajištění, že tělo zabírá 100% výšky */
-    margin: 0; /* Odstranění výchozího okraje */
+    height: 100%;
+    margin: 0;
 }
 
 /* Základní stylování pro tělo */
@@ -17,7 +17,7 @@ body {
 
 /* Hlavička */
 header {
-    background-color: #007bff; /* Modrá barva */
+    background-color: #007bff;
     color: white;
     padding: 10px 20px;
     position: relative;
@@ -25,28 +25,28 @@ header {
 
 header .container {
     display: flex;
-    justify-content: space-between; /* Pro rozložení loga a autentizačních odkazů */
-    align-items: center; /* Vycentrování vertikálně */
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo img {
-    height: 50px; /* Výška loga */
+    height: 50px;
 }
 
 nav {
-    flex-grow: 1; /* Umožní nav zaujmout dostupný prostor */
-    text-align: center; /* Vycentrování obsahu uvnitř nav */
+    flex-grow: 1;
+    text-align: center;
 }
 
 .nav-links {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    display: inline-flex; /* Použití inline-flex pro horizontální zarovnání */
+    display: inline-flex;
 }
 
 .nav-links li {
-    margin: 0 15px; /* Větší mezery mezi odkazy */
+    margin: 0 15px;
 }
 
 .nav-links a {
@@ -57,57 +57,57 @@ nav {
 
 .auth-links {
     box-sizing: border-box;
-    padding: 10px; /* Přidání paddingu */
-    border-left: 1px solid white; /* Rámeček na levé straně */
-    margin-left: 20px; /* Oddělení od navigačních odkazů */
+    padding: 10px;
+    border-left: 1px solid white;
+    margin-left: 20px;
 }
 
 /* Styly pro tlačítka */
 .btn {
-    display: inline-block; /* Blokový prvek */
-    padding: 10px 15px; /* Vnitřní okraje */
-    color: white; /* Barva textu */
-    background-color: #007bff; /* Barva pozadí */
-    border: none; /* Bez okraje */
-    border-radius: 5px; /* Zaoblení rohů */
-    text-decoration: none; /* Bez podtržení */
-    transition: background-color 0.3s; /* Přechod pro barvu pozadí */
+    display: inline-block;
+    padding: 10px 15px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
 }
 
 .btn:hover {
-    background-color: #0056b3; /* Barva pozadí při najetí myší */
+    background-color: #0056b3;
 }
 
 /* Tlačítko odhlášení */
 .btn-odhlasit {
-    display: inline-block; /* Umožní používat padding a margin */
-    padding: 2px 4px; /* Přidání paddingu */
-    color: white; /* Barva textu */
-    background-color: #dc3545; /* Červená barva pro nebezpečné akce */
-    text-decoration: none; /* Odstranění podtržení */
-    border-radius: 5px; /* Zaoblení rohů */
-    font-weight: bold; /* Zvýraznění textu */
-    transition: background-color 0.3s ease; /* Hladký přechod pro hover efekt */
+    display: inline-block;
+    padding: 2px 4px;
+    color: white;
+    background-color: #dc3545;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 .btn-odhlasit:hover {
-    background-color: #c82333; /* Tmavší červená při hoveru */
+    background-color: #c82333;
 }
 
 /* Tlačítko přihlášení */
 .btn-prihlasit {
-    display: inline-block; /* Umožní používat padding a margin */
-    padding: 10px 20px; /* Přidání paddingu */
-    color: white; /* Barva textu */
-    background-color: #007bff; /* Modrá barva pro přihlašovací akci */
-    text-decoration: none; /* Odstranění podtržení */
-    border-radius: 5px; /* Zaoblení rohů */
-    font-weight: bold; /* Zvýraznění textu */
-    transition: background-color 0.3s ease; /* Hladký přechod pro hover efekt */
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: #007bff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 .btn-prihlasit:hover {
-    background-color: #0056b3; /* Tmavší modrá při hoveru */
+    background-color: #0056b3;
 }
 
 /* Hlavní obsah */
@@ -116,21 +116,21 @@ main {
 }
 
 .main-actions {
-    display: flex; /* Flexbox pro horizontální rozložení */
-    justify-content: space-around; /* Vytvoří prostor mezi akcemi */
-    flex-wrap: wrap; /* Umožní zalamování na novou řadu */
-    margin-top: 20px; /* Odstup nad akcemi */
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 .action-box {
-    background-color: #f0f0f0; /* Barva pozadí */
-    border: 1px solid #ccc; /* Okraj */
-    border-radius: 8px; /* Zaoblení rohů */
-    padding: 20px; /* Vnitřní okraje */
-    margin: 10px; /* Vnější okraje */
-    flex: 1; /* Flexibilní šířka */
-    min-width: 200px; /* Minimální šířka boxu */
-    text-align: center; /* Vycentrování textu */
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
 }
 
 .action-box h3 {
@@ -156,9 +156,9 @@ footer .container {
 .wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Minimální výška wrapperu je 100% výšky okna */
+    min-height: 100vh;
 }
 
 .content {
-    flex: 1; /* Obsah zabere zbytek dostupného místa */
+    flex: 1;
 }
