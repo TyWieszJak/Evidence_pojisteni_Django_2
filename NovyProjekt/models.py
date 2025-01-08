@@ -51,7 +51,7 @@ class Uzivatel(AbstractBaseUser):
 
 # Model Pojistenec
 class Pojistenec(models.Model):
-    user = models.ForeignKey(Uzivatel, on_delete=models.CASCADE)
+    user = models.ForeignKey(Uzivatel, on_delete=models.CASCADE, null=True, blank=True)
     jmeno = models.CharField(max_length=100)
     prijmeni = models.CharField(max_length=100)
     adresa = models.CharField(max_length=255)
