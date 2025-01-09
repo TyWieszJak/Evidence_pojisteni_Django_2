@@ -21,14 +21,14 @@
             </div>
         </div>
         {% if pojistenec.foto %}
-            <div class="detail-fotografie">
-                <img src="{{ pojistenec.foto.url }}" alt="Foto pojištěnce">
-            </div>
-        {% else %}
-            <div class="no-fotografie">
-                <p class="fotografie">Fotografie není k dispozici.</p>
-            </div>
-        {% endif %}
+                <div class="detail-fotografie">
+                    <img src="{{ pojistenec.foto.url }}" alt="Avatar uživatele">
+                </div>
+            {% else %}
+                <div class="no-fotografie">
+                    <img src="/media/images/avatar.png" alt="Default Avatar">
+                </div>
+            {% endif %}
 
         <div class="detail-actions">
             <a href="{% url 'upravit_pojistence' pk=pojistenec.pk %}">Upravit</a>

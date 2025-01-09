@@ -29,6 +29,7 @@ class Uzivatel(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     last_login = models.DateTimeField(default=timezone.now)
     date_joined = models.DateTimeField(default=timezone.now)
+    foto = models.ImageField(upload_to='images/', blank=True, null=True)
 
     objects = UzivatelManager()
 
@@ -55,7 +56,7 @@ class Pojistenec(models.Model):
     jmeno = models.CharField(max_length=100)
     prijmeni = models.CharField(max_length=100)
     adresa = models.CharField(max_length=255)
-    vek = models.IntegerField()
+    vek = models.IntegerField(null=True)
     foto = models.ImageField(upload_to='images/', blank=True, null=True)
 
     def __str__(self):
