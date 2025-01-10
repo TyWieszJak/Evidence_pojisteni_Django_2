@@ -1,5 +1,6 @@
 from django.contrib.auth.tokens import default_token_generator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
 from django.shortcuts import render,get_object_or_404, redirect
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
@@ -250,7 +251,8 @@ class Zapomenute_Heslo(View):
                 for user in users:
                     token = default_token_generator.make_token(user)
                     uidb64 = urlsafe_base64_encode(str(user.pk).encode())
-                    reset_link = request.build_absolute_uri(reverse('password_reset_confirm', args=[uidb64, token]))
+                    #reset_link = request.build_absolute_uri(reverse('password_reset_confirm', args=[uidb64, token]))
+                    """
                     send_mail(
                         'Obnovení hesla',
                         f'Klikněte na tento odkaz pro obnovení hesla: {reset_link}',
@@ -258,6 +260,8 @@ class Zapomenute_Heslo(View):
                         [email],
                         fail_silently=False,
                     )
+                    """
+                    return redirect('password_reset_confirm', uidb64=uidb64, token=token)
                 messages.success(request, 'Odkaz pro obnovení hesla byl odeslán na váš e-mail.')
             else:
                 messages.error(request, 'Uživatel s tímto e-mailem neexistuje.')
@@ -280,6 +284,7 @@ class PasswordResetConfirmView(View):
             return redirect('zapomenute_heslo')
 
     def post(self, request, uidb64, token):
+        DEFAULT_PASSWORD = "heslojeveslo"
         try:
             uid = urlsafe_base64_decode(uidb64).decode()
             user = Uzivatel.objects.get(pk=uid)
@@ -287,6 +292,10 @@ class PasswordResetConfirmView(View):
                 form = SetPasswordForm(user, request.POST)
                 if form.is_valid():
                     form.save()
+                    if user.email == "demo@example.com":
+                        user.set_password(DEFAULT_PASSWORD)
+                        user.save()
+                        messages.success(request, "Heslo pro testovací účet bylo vráceno na původní hodnotu.")
                     messages.success(request, 'Vaše heslo bylo úspěšně obnoveno.')
                     return redirect('zapomenute_heslo')
                 else:
@@ -451,3 +460,4 @@ def smazat_pojistnou_udalost(request, id):
         pojistna_udalost.delete()
         return redirect('seznam_pojistnych_udalosti')
     return render(request, 'pojistne_udalosti/smazat_pojistnou_udalost.html', {'pojistna_udalost': pojistna_udalost})
+
