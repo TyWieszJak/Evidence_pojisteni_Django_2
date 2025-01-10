@@ -1,9 +1,12 @@
+from django.contrib.auth.tokens import default_token_generator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render,get_object_or_404, redirect
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+
 from .models import Pojistenec, Pojisteni, PojistnaUdalost , Uzivatel
 from .forms import PojistenecForm, VyhledavaciForm, PridaniForm, PojistnaUdalostForm
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
 from django.contrib import messages
 from .forms import ZapomenuteHesloForm, UzivatelForm
 from django.core.mail import send_mail
@@ -233,6 +236,99 @@ def co_vidi(request):
     uzivatel = Uzivatel.objects.get(user=request.user)
     return render(request, 'your_template.html', {'user_profile': uzivatel})
 
+class Zapomenute_Heslo(View):
+    def get(self, request):
+        form = PasswordResetForm()
+        return render(request, 'pojistenci/zapomenute_heslo.html', {'form': form})
+
+    def post(self, request):
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            users = Uzivatel.objects.filter(email=email)
+            if users.exists():
+                for user in users:
+                    token = default_token_generator.make_token(user)
+                    uidb64 = urlsafe_base64_encode(str(user.pk).encode())
+                    reset_link = request.build_absolute_uri(reverse('password_reset_confirm', args=[uidb64, token]))
+                    send_mail(
+                        'Obnovení hesla',
+                        f'Klikněte na tento odkaz pro obnovení hesla: {reset_link}',
+                        'noreply@vašeaplikace.com',
+                        [email],
+                        fail_silently=False,
+                    )
+                messages.success(request, 'Odkaz pro obnovení hesla byl odeslán na váš e-mail.')
+            else:
+                messages.error(request, 'Uživatel s tímto e-mailem neexistuje.')
+            return redirect('zapomenute_heslo')
+        return render(request, 'pojistenci/password_reset_confirm.html', {'form': form})
+
+class PasswordResetConfirmView(View):
+    def get(self, request, uidb64, token):
+        try:
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = Uzivatel.objects.get(pk=uid)
+            if default_token_generator.check_token(user, token):
+                form = SetPasswordForm(user)
+                return render(request, 'pojistenci/password_reset_confirm.html', {'form': form, 'uidb64': uidb64, 'token': token})
+            else:
+                messages.error(request, "Odkaz na resetování hesla není platný.")
+                return redirect('zapomenute_heslo')
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            messages.error(request, "Odkaz na resetování hesla není platný.")
+            return redirect('zapomenute_heslo')
+
+    def post(self, request, uidb64, token):
+        try:
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = Uzivatel.objects.get(pk=uid)
+            if default_token_generator.check_token(user, token):
+                form = SetPasswordForm(user, request.POST)
+                if form.is_valid():
+                    form.save()
+                    messages.success(request, 'Vaše heslo bylo úspěšně obnoveno.')
+                    return redirect('zapomenute_heslo')
+                else:
+                    #print(form.errors)
+                    messages.error(request, "Formulář obsahuje chyby.")
+                    return render(request, 'pojistenci/password_reset_confirm.html', {'form': form, 'uidb64': uidb64, 'token': token})
+            else:
+                messages.error(request, "Odkaz na resetování hesla není platný.")
+                return redirect('zapomenute_heslo')
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            messages.error(request, "Odkaz na resetování hesla není platný.")
+            return redirect('zapomenute_heslo')
+
+"""
+class Zapomenute_Heslo(View):
+    def get(self, request):
+        form = PasswordResetForm()
+        return render(request, 'pojistenci/zapomenute_heslo.html', {'form': form})
+
+    def post(self, request):
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            users = Uzivatel.objects.filter(email=email)
+            if users.exists():
+                for user in users:
+                    # Vytvoření tokenu pro reset hesla
+                    token = default_token_generator.make_token(user)
+                    uidb64 = urlsafe_base64_encode(str(user.id).encode())
+                    reset_link = request.build_absolute_uri(reverse('password_reset_view', args=[uidb64, token]))
+                    send_mail(
+                        'Obnovení hesla',
+                        f'Klikněte na tento odkaz pro obnovení hesla: {reset_link}',
+                        'noreply@evidence.pythonanywhere.com',
+                        [email],
+                        fail_silently=False,
+                    )
+                messages.success(request, 'Odkaz pro obnovení hesla byl odeslán na váš e-mail.')
+            else:
+                messages.error(request, 'Uživatel s tímto e-mailem neexistuje.')
+            return redirect('prihlaseni')  # Přesměrování na přihlašovací stránku
+        return render(request, 'pojistenci/zapomenute_heslo.html', {'form': form})
 
 #@login_required
 class Zapomenute_Heslo(View):
@@ -245,9 +341,9 @@ class Zapomenute_Heslo(View):
         if form.is_valid():
             email = form.cleaned_data['email']
             try:
-                user = User.objects.get(email=email)
+                user = Uzivatel.objects.get(email=email)
                 # Odeslat e-mail s odkazem na reset hesla
-                reset_link = request.build_absolute_uri(reverse('reset_heslo', args=[user.id]))
+                reset_link = request.build_absolute_uri(reverse('password_reset_view', args=[user.id]))
                 send_mail(
                     'Obnovení hesla',
                     f'Klikněte na následující odkaz pro obnovení hesla: {reset_link}',
@@ -261,6 +357,21 @@ class Zapomenute_Heslo(View):
             return redirect('prihlaseni')  # Přesměrování na přihlašovací stránku
         return render(request, 'zapomenute_heslo.html', {'form': form})
 
+class PasswordResetConfirmView(View):
+    def get(self, request, uidb64, token):
+        try:
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = Uzivatel().objects.get(id=uid)
+            if default_token_generator.check_token(user, token):
+                # Uživatelský token je platný
+                return render(request, 'pojistenci/password_reset_confirm.html', {'uidb64': uidb64, 'token': token})
+            else:
+                messages.error(request, "Odkaz na resetování hesla není platný.")
+                return redirect('pojistenci/zapomenute_heslo')
+        except Exception:
+            messages.error(request, "Odkaz na resetování hesla není platný.")
+            return redirect('pojistenci/zapomenute_heslo')
+"""
 #@login_required
 def odhlasit(request):
     logout(request)

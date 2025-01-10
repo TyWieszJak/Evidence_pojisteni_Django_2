@@ -152,3 +152,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/pojistenci/prihlaseni/'
 #LOGIN_REDIRECT_URL = 'pojistenci/seznam_pojistencu'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

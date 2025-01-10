@@ -37,3 +37,19 @@ class PojistnaUdalostForm(forms.ModelForm):
 
 class ZapomenuteHesloForm(forms.Form):
     email = forms.EmailField(label='E-mail', max_length=254)
+
+class SetPasswordForm(forms.Form):
+    new_password1 = forms.CharField(
+        label='Nové heslo',  # Měníme název pro první pole
+        widget=forms.PasswordInput,
+        error_messages={
+            'required': 'Toto pole je povinné.'
+        }
+    )
+    new_password2 = forms.CharField(
+        label='Potvrdit nové heslo',  # Měníme název pro druhé pole
+        widget=forms.PasswordInput,
+        error_messages={
+            'required': 'Toto pole je povinné.'
+        }
+    )

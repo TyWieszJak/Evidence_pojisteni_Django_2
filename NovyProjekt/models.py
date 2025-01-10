@@ -27,6 +27,7 @@ class Uzivatel(AbstractBaseUser):
     last_name = models.CharField(max_length=50, default="")
     email = models.EmailField(max_length=300, unique=True)
     is_admin = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     last_login = models.DateTimeField(default=timezone.now)
     date_joined = models.DateTimeField(default=timezone.now)
     foto = models.ImageField(upload_to='images/', blank=True, null=True)

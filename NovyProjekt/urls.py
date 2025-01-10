@@ -1,3 +1,5 @@
+from django.contrib.auth.views import PasswordResetDoneView, PasswordResetView, PasswordResetConfirmView, \
+    PasswordResetCompleteView
 from django.urls import path
 from . import views
 from .views import seznam_pojistencu
@@ -29,13 +31,14 @@ urlpatterns = [
     path('pojistne_udalosti/upravit/<int:id>/', views.upravit_pojistnou_udalost, name='upravit_pojistnou_udalost'),
     path('pojistne_udalosti/smazat/<int:id>/', views.smazat_pojistnou_udalost, name='smazat_pojistnou_udalost'),
 
-    # Přihlášení
+    # Cesty pro přihlášení, registraci, a odhlášení
     path('pojistenci/prihlaseni/', views.prihlaseni, name='prihlaseni'),
     path('pojistenci/registrace/', views.registrace, name='registrace'),
-    path('pojistenci/zapomenute_heslo/', views.Zapomenute_Heslo.as_view()  , name='zapomenute_heslo'),
     path('odhlasit/', views.odhlasit, name='odhlasit'),
 
-    path('admin-only/', views.pouze_administrator, name='admin_only'),
-    path('insured-only/', views.pouze_uzivatel, name='insured_only'),
+    path('pojistenci/zapomenute_heslo/', views.Zapomenute_Heslo.as_view(), name='zapomenute_heslo'),
+    path('reset/<uidb64>/<token>/', views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/complete/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 
 ]

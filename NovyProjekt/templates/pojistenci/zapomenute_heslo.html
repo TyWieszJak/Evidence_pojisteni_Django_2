@@ -3,17 +3,37 @@
 {% block extra_styles %}
     <link rel="stylesheet" href="{% static 'css/zapomenute_heslo.css' %}">
 {% endblock %}
+
 {% block title %}Zapomenuté heslo{% endblock %}
 
 {% block content %}
-<div class="container_zampomenute_heslo">
+<div class="container_zapomenute_heslo">
     <h2>Zapomenuté heslo</h2>
-    
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     <form method="POST">
         {% csrf_token %}
+        {% if form.errors %}
+            <div class="error-messages">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endif %}
         {{ form.as_p }}
         <button type="submit" class="btn">Odeslat e-mail pro obnovení hesla</button>
     </form>
+
+    <!-- Odkaz na přihlášení -->
     <p>Již máte účet? <a href="{% url 'prihlaseni' %}">Přihlaste se zde</a>.</p>
 </div>
 {% endblock %}
