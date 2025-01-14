@@ -1,17 +1,19 @@
+from django.contrib.auth.views import PasswordResetDoneView, PasswordResetView, PasswordResetConfirmView, \
+    PasswordResetCompleteView
 from django.urls import path
-
 from . import views
-from .views import *
-from rest_framework_simplejwt import views as jwt_views
-from .views import SmazatPojisteniAPI,DetailPojisteniAPI
+from .views import seznam_pojistencu
 
+from django.urls import path
+from . import views
 
 
 urlpatterns = [
-    # Cesty pro pojištěnce
     path('', views.index, name='index'),  # Domovská stránka
+
+    # Cesty pro pojištěnce
     path('pojistenci/seznam_pojistencu/', views.seznam_pojistencu, name='seznam_pojistencu'),
-    path('pridat-pojistence/',views.pridat_pojistence, name='pridat_pojistence'),
+    path('pridat-pojistence/', views.pridat_pojistence, name='pridat_pojistence'),
     path('pojistenci/uprav/pojistenec/<int:pk>/', views.upravit_pojistence, name='upravit_pojistence'),
     path('pojistenci/smazat/pojistenec/<int:pk>/', views.smazat_pojistence, name='smazat_pojistence'),
     path('pojistenci/detail/pojistenec/<int:pk>/', views.detail_pojistence, name='detail_pojistence'),
@@ -29,32 +31,14 @@ urlpatterns = [
     path('pojistne_udalosti/upravit/<int:id>/', views.upravit_pojistnou_udalost, name='upravit_pojistnou_udalost'),
     path('pojistne_udalosti/smazat/<int:id>/', views.smazat_pojistnou_udalost, name='smazat_pojistnou_udalost'),
 
-    path('prihlaseni/', views.prihlaseni, name='prihlaseni'),
-    path('registrace/', views.registrace, name='registrace'),
+    # Cesty pro přihlášení, registraci, a odhlášení
+    path('pojistenci/prihlaseni/', views.prihlaseni, name='prihlaseni'),
+    path('pojistenci/registrace/', views.registrace, name='registrace'),
     path('odhlasit/', views.odhlasit, name='odhlasit'),
-    path('zapomenute_heslo/', Zapomenute_Heslo.as_view(), name='Zapomenute_heslo'),
-    path('admin-only/', views.pouze_administrator, name='admin_only'),
-    path('insured-only/', views.pouze_uzivatel, name='insured_only'),
 
-    # Tokeny
-    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
-
-
-    # Cesty pro API
-    path('api/vytvor_udalost/', VytvorPojistnouUdalostAPI.as_view(), name='vytvor_udalost_api'),
-    path('api/udalosti/', SeznamUdalostiAPI.as_view(), name='seznam_udalosti_api'),
-    path('api/pojisteni/', SeznamPojisteniAPI.as_view(), name='seznam_pojisteni_api'),
-    path('api/pridat-pojisteni/<int:pojistenec_id>/', PridatPojisteniAPI.as_view(), name='pridat_pojisteni_api'),
-    path('api/upravit-pojisteni/<int:pk>/', UpravitPojisteniAPI.as_view(), name='upravit_pojisteni_api'),
-    path('api/smazat-pojisteni/<int:pk>/', SmazatPojisteniAPI.as_view(), name='smazat_pojisteni_api'),
-    path('api/detail-pojisteni/<int:pk>/', DetailPojisteniAPI.as_view(), name='detail_pojisteni_api'),
-    path('api/seznam-pojistencu/', SeznamPojistencuAPI.as_view(), name='seznam_pojistencu_api'),
-    path('api/smazat-pojistence/<int:pk>/', SmazatPojistenceAPI.as_view(), name='smazat_pojistence_api'),
-    path('api/detail-pojistence/<int:pk>/', DetailPojistenceAPI.as_view(), name='detail_pojistence_api'),
-    path('api/upravit-pojistence/<int:pk>/', UpravitPojistenceAPI.as_view(), name='upravit_pojistence_api'),
-    path('api/pridat-pojistence/', PridatPojistenceAPI.as_view(), name='pridat_pojistence_api'),
-    path('api/profil/', UzivatelProfilAPI.as_view(), name='profil_api'),
-    path('api/zapomenute-heslo/', ZapomenuteHesloAPI.as_view(), name='zapomenute_heslo_api'),
+    path('pojistenci/zapomenute_heslo/', views.Zapomenute_Heslo.as_view(), name='zapomenute_heslo'),
+    path('reset/<uidb64>/<token>/', views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('reset/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/complete/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 
 ]

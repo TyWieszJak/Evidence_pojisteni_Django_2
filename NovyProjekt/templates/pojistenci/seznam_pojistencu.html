@@ -31,16 +31,20 @@
                 </tr>
             </thead>
             <tbody>
-                {% for pojistenec in page_obj %}
+                {% for pojistenec in page_obj.object_list %}
                     <tr>
                         <td>{{ pojistenec.jmeno }}</td>
                         <td>{{ pojistenec.prijmeni }}</td>
                         <td>{{ pojistenec.adresa }}</td>
                         <td>
                             <div class="pojistenci-actions">
-                                <a href="{% url 'detail_pojistence' pojistenec.pk %}">Detail</a>
-                                <a href="{% url 'upravit_pojistence' pojistenec.pk %}">Upravit</a>
-                                <a href="{% url 'smazat_pojistence' pojistenec.pk %}">Smazat</a>
+                                {% if pojistenec.pk %}
+                                    <a href="{% url 'detail_pojistence' pojistenec.pk %}">Detail</a>
+                                    <a href="{% url 'upravit_pojistence' pojistenec.pk %}">Upravit</a>
+                                    <a href="{% url 'smazat_pojistence' pojistenec.pk %}">Smazat</a>
+                                {% else %}
+                                    <span>Detail není dostupný</span>
+                                {% endif %}
                             </div>
                         </td>
                     </tr>
