@@ -5,14 +5,12 @@ from django.shortcuts import render,get_object_or_404, redirect
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 from .models import Pojistenec, Pojisteni, PojistnaUdalost , Uzivatel
-from .forms import PojistenecForm, VyhledavaciForm, PridaniForm, PojistnaUdalostForm
+from .forms import PojistenecForm, VyhledavaciForm, PridaniForm, PojistnaUdalostForm,ZapomenuteHesloForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
 from django.contrib import messages
-from .forms import ZapomenuteHesloForm, UzivatelForm
 from django.core.mail import send_mail
 from django.views import View
-from django.urls import reverse
 from django.contrib.auth import authenticate, login , logout
 from django.contrib.auth.models import User , Group
 import logging
@@ -60,31 +58,21 @@ def seznam_ualosti(request):
 @login_required
 #@user_passes_test(admin)
 def seznam_pojisteni(request):
-    # Inicializace formuláře pro vyhledávání
     vyhledavaci_form = VyhledavaciForm(request.GET or None)
-
-    # Získání všech pojištění
     pojisteni = Pojisteni.objects.all()
 
-    # Zpracování formuláře pro vyhledávání
     if vyhledavaci_form.is_valid():
-        # Získání hodnot z formuláře
         hledany_typ = vyhledavaci_form.cleaned_data.get('typ_pojisteni')
-
-        # Filtrování podle hledaného typu pojištění, pokud je zadaný
         if hledany_typ:
             pojisteni = pojisteni.filter(typ_pojisteni__icontains=hledany_typ)
-
-        # Příklad: pokud chceš filtrovat podle jména pojištěnce
         hledany_jmeno = vyhledavaci_form.cleaned_data.get('jmeno')
         if hledany_jmeno:
             pojisteni = pojisteni.filter(pojistenec__jmeno__icontains=hledany_jmeno)
 
-    paginator = Paginator(pojisteni, 10)  # 10 pojištění na stránku
-    page_number = request.GET.get('page')  # Získání čísla stránky z URL
-    page_obj = paginator.get_page(page_number)  # Získání stránky
+    paginator = Paginator(pojisteni, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    # Vrátí stránku se seznamem pojištění a vyhledávacím formulářem
     return render(request, 'pojistenci/seznam_pojisteni.html', {
         'vyhledavaci_form': vyhledavaci_form,
         'pojisteni': page_obj,
@@ -186,15 +174,15 @@ def smazat_pojistence(request, pk):
 
 @login_required
 #@user_passes_test(pojisteny)
-def detail_pojistence(request, pk):
-    pojistenec = get_object_or_404(Pojistenec, pk=pk)
-    pojisteni = pojistenec.pojisteni.all()  # Získání všech pojištění pro daného pojištěnce
+    def detail_pojistence(request, pk):
+        pojistenec = get_object_or_404(Pojistenec, pk=pk)
+        pojisteni = pojistenec.pojisteni.all()  # Získání všech pojištění pro daného pojištěnce
 
-    return render(request, 'pojistenci/detail_pojistence.html', {
-        'pojistenec': pojistenec,
-        'pojisteni': pojisteni,  # Předání pojištění do šablony
-        'uzivatel': request.user
-    })
+        return render(request, 'pojistenci/detail_pojistence.html', {
+            'pojistenec': pojistenec,
+            'pojisteni': pojisteni,  # Předání pojištění do šablony
+            'uzivatel': request.user
+        })
 
 @login_required
 #@user_passes_test(pojisteny)

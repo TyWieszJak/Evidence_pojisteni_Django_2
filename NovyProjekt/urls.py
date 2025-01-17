@@ -6,7 +6,7 @@ from .views import seznam_pojistencu
 
 from django.urls import path
 from . import views
-
+from .viewsAPI import smazat_pojistence
 
 urlpatterns = [
     path('', views.index, name='index'),  # Domovská stránka
@@ -15,7 +15,7 @@ urlpatterns = [
     path('pojistenci/seznam_pojistencu/', views.seznam_pojistencu, name='seznam_pojistencu'),
     path('pridat-pojistence/', views.pridat_pojistence, name='pridat_pojistence'),
     path('pojistenci/uprav/pojistenec/<int:pk>/', views.upravit_pojistence, name='upravit_pojistence'),
-    path('pojistenci/smazat/pojistenec/<int:pk>/', views.smazat_pojistence, name='smazat_pojistence'),
+    #path('pojistenci/smazat/pojistenec/<int:pk>/', views.smazat_pojistence, name='smazat_pojistence'),
     path('pojistenci/detail/pojistenec/<int:pk>/', views.detail_pojistence, name='detail_pojistence'),
 
     # Cesty pro pojištění
@@ -41,4 +41,7 @@ urlpatterns = [
     path('reset/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/complete/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 
+
+    # cesty pro API
+    path('api/pojistenci/<int:pk>/delete/', smazat_pojistence.as_view(), name='smazat_pojistence')
 ]

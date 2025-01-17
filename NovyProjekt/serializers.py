@@ -19,3 +19,4 @@ class PojisteniSerializer(serializers.ModelSerializer):
 class PojistnaUdalostiSerializer(serializers.ModelSerializer):
     class Meta:
         model = PojistnaUdalost
+        field = '__all__'
