@@ -25,17 +25,6 @@ def admin(user):
 def pojisteny(user):
     return user.groups.filter(name='Insured').exists()
 
-@login_required
-@user_passes_test(admin)
-def pouze_administrator(request):
-    # View přístupný pouze pro administrátory
-    pass
-
-@login_required
-@user_passes_test(pojisteny)
-def pouze_uzivatel(request):
-    # View přístupný pouze pro pojištěné
-    pass
 
 @login_required
 #@user_passes_test(pojisteny)
@@ -60,31 +49,20 @@ def seznam_ualosti(request):
 @login_required
 #@user_passes_test(admin)
 def seznam_pojisteni(request):
-    # Inicializace formuláře pro vyhledávání
     vyhledavaci_form = VyhledavaciForm(request.GET or None)
-
-    # Získání všech pojištění
     pojisteni = Pojisteni.objects.all()
-
-    # Zpracování formuláře pro vyhledávání
     if vyhledavaci_form.is_valid():
-        # Získání hodnot z formuláře
         hledany_typ = vyhledavaci_form.cleaned_data.get('typ_pojisteni')
-
-        # Filtrování podle hledaného typu pojištění, pokud je zadaný
         if hledany_typ:
             pojisteni = pojisteni.filter(typ_pojisteni__icontains=hledany_typ)
-
-        # Příklad: pokud chceš filtrovat podle jména pojištěnce
         hledany_jmeno = vyhledavaci_form.cleaned_data.get('jmeno')
         if hledany_jmeno:
             pojisteni = pojisteni.filter(pojistenec__jmeno__icontains=hledany_jmeno)
 
-    paginator = Paginator(pojisteni, 10)  # 10 pojištění na stránku
-    page_number = request.GET.get('page')  # Získání čísla stránky z URL
-    page_obj = paginator.get_page(page_number)  # Získání stránky
+    paginator = Paginator(pojisteni, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
-    # Vrátí stránku se seznamem pojištění a vyhledávacím formulářem
     return render(request, 'pojistenci/seznam_pojisteni.html', {
         'vyhledavaci_form': vyhledavaci_form,
         'pojisteni': page_obj,
@@ -129,7 +107,6 @@ def upravit_pojisteni(request, pk):
 @login_required
 #@user_passes_test(admin)
 def smazat_pojisteni(request, pk):
-    # Získání pojištění k odstranění
     pojisteni = get_object_or_404(Pojisteni, pk=pk)
     pojistenec = pojisteni.pojistenec  # Získejte souvisejícího pojištěnce
 
@@ -139,7 +116,7 @@ def smazat_pojisteni(request, pk):
 
     return render(request, 'pojistenci/smazat_pojisteni.html', {
         'pojisteni': pojisteni,
-        'pojistenec': pojistenec  # Předejte objekt pojistenec do kontextu
+        'pojistenec': pojistenec
     })
 
 
@@ -160,39 +137,38 @@ def seznam_pojistencu(request):
         prijmeni = request.GET.get('prijmeni')
         pojistenci = pojistenci.filter(jmeno__icontains=jmeno, prijmeni__icontains=prijmeni)
 
-    # Paginace
-    paginator = Paginator(pojistenci, 10)  # 10 pojištěnců na stránku
-    page_number = request.GET.get('page')  # Získejte číslo stránky z dotazu
+    paginator = Paginator(pojistenci, 10)
+    page_number = request.GET.get('page')
     try:
-        page_obj = paginator.get_page(page_number)  # Získejte příslušnou stránku
+        page_obj = paginator.get_page(page_number)
     except PageNotAnInteger:
-        page_obj = paginator.get_page(1)  # Pokud není číslo stránky, vraťte první stránku
+        page_obj = paginator.get_page(1)
     except EmptyPage:
-        page_obj = paginator.get_page(paginator.num_pages)  # Pokud je stránka prázdná, vraťte poslední stránku
+        page_obj = paginator.get_page(paginator.num_pages)
 
     return render(request, 'pojistenci/seznam_pojistencu.html', {
         'vyhledavaci_form': vyhledavaci_form,
-        'page_obj': page_obj,  # Předáváme paginovaný objekt
+        'page_obj': page_obj,
     })
 
 @login_required
 #@user_passes_test(admin)
 def smazat_pojistence(request, pk):
-    pojistenec = get_object_or_404(Pojistenec, pk=pk)  # Získáme konkrétního pojištěnce
+    pojistenec = get_object_or_404(Pojistenec, pk=pk)
     if request.method == 'POST':
-        pojistenec.delete()  # Smažeme pojištěnce
-        return redirect('seznam_pojistencu')  # Přesměrujeme na seznam pojištěnců
+        pojistenec.delete()
+        return redirect('seznam_pojistencu')
     return render(request, 'pojistenci/smazat_pojistence.html', {'pojistenec': pojistenec})
 
 @login_required
 #@user_passes_test(pojisteny)
 def detail_pojistence(request, pk):
     pojistenec = get_object_or_404(Pojistenec, pk=pk)
-    pojisteni = pojistenec.pojisteni.all()  # Získání všech pojištění pro daného pojištěnce
+    pojisteni = pojistenec.pojisteni.all()
 
     return render(request, 'pojistenci/detail_pojistence.html', {
         'pojistenec': pojistenec,
-        'pojisteni': pojisteni,  # Předání pojištění do šablony
+        'pojisteni': pojisteni,
         'uzivatel': request.user
     })
 
@@ -218,7 +194,7 @@ def pridat_pojistence(request):
         if form.is_valid():
             print("Formulář je validní")
             pojistenec = form.save(commit=False)
-           # pojistenec.user = request.user  # Zde přiřazujeme přihlášeného uživatele
+           # pojistenec.user = request.user
             pojistenec.save()
             form.save()
             return redirect('seznam_pojistencu')
@@ -233,9 +209,6 @@ def index(request):
     logger.debug("Toto je debug zpráva")
     return render(request, 'index.html')
 
-def co_vidi(request):
-    uzivatel = Uzivatel.objects.get(user=request.user)
-    return render(request, 'your_template.html', {'user_profile': uzivatel})
 
 class Zapomenute_Heslo(View):
     def get(self, request):
@@ -309,78 +282,6 @@ class PasswordResetConfirmView(View):
             messages.error(request, "Odkaz na resetování hesla není platný.")
             return redirect('zapomenute_heslo')
 
-"""
-class Zapomenute_Heslo(View):
-    def get(self, request):
-        form = PasswordResetForm()
-        return render(request, 'pojistenci/zapomenute_heslo.html', {'form': form})
-
-    def post(self, request):
-        form = PasswordResetForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            users = Uzivatel.objects.filter(email=email)
-            if users.exists():
-                for user in users:
-                    # Vytvoření tokenu pro reset hesla
-                    token = default_token_generator.make_token(user)
-                    uidb64 = urlsafe_base64_encode(str(user.id).encode())
-                    reset_link = request.build_absolute_uri(reverse('password_reset_view', args=[uidb64, token]))
-                    send_mail(
-                        'Obnovení hesla',
-                        f'Klikněte na tento odkaz pro obnovení hesla: {reset_link}',
-                        'noreply@evidence.pythonanywhere.com',
-                        [email],
-                        fail_silently=False,
-                    )
-                messages.success(request, 'Odkaz pro obnovení hesla byl odeslán na váš e-mail.')
-            else:
-                messages.error(request, 'Uživatel s tímto e-mailem neexistuje.')
-            return redirect('prihlaseni')  # Přesměrování na přihlašovací stránku
-        return render(request, 'pojistenci/zapomenute_heslo.html', {'form': form})
-
-#@login_required
-class Zapomenute_Heslo(View):
-    def get(self, request):
-        form = ZapomenuteHesloForm()
-        return render(request, 'pojistenci/zapomenute_heslo.html', {'form': form})
-
-    def post(self, request):
-        form = ZapomenuteHesloForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            try:
-                user = Uzivatel.objects.get(email=email)
-                # Odeslat e-mail s odkazem na reset hesla
-                reset_link = request.build_absolute_uri(reverse('password_reset_view', args=[user.id]))
-                send_mail(
-                    'Obnovení hesla',
-                    f'Klikněte na následující odkaz pro obnovení hesla: {reset_link}',
-                    'noreply@vašeaplikace.com',
-                    [email],
-                    fail_silently=False,
-                )
-                messages.success(request, 'Odkaz pro obnovení hesla byl odeslán na váš e-mail.')
-            except User.DoesNotExist:
-                messages.error(request, 'Uživatel s tímto e-mailem neexistuje.')
-            return redirect('prihlaseni')  # Přesměrování na přihlašovací stránku
-        return render(request, 'zapomenute_heslo.html', {'form': form})
-
-class PasswordResetConfirmView(View):
-    def get(self, request, uidb64, token):
-        try:
-            uid = urlsafe_base64_decode(uidb64).decode()
-            user = Uzivatel().objects.get(id=uid)
-            if default_token_generator.check_token(user, token):
-                # Uživatelský token je platný
-                return render(request, 'pojistenci/password_reset_confirm.html', {'uidb64': uidb64, 'token': token})
-            else:
-                messages.error(request, "Odkaz na resetování hesla není platný.")
-                return redirect('pojistenci/zapomenute_heslo')
-        except Exception:
-            messages.error(request, "Odkaz na resetování hesla není platný.")
-            return redirect('pojistenci/zapomenute_heslo')
-"""
 #@login_required
 def odhlasit(request):
     logout(request)
@@ -410,7 +311,7 @@ def registrace(request):
         if form.is_valid():
             user = form.save()
             messages.success(request, 'Účet byl úspěšně vytvořen!')
-            return redirect('prihlaseni')  # Přesměrování na stránku pro přihlášení
+            return redirect('prihlaseni')
     else:
         form = UzivatelForm()
     return render(request, 'pojistenci/registrace.html', {'form': form})
@@ -428,7 +329,6 @@ def seznam_pojistnych_udalosti(request):
 
 @login_required
 #@user_passes_test(pojisteny)
-# Přidání nové pojistné události
 def pridat_pojistnou_udalost(request):
     if request.method == 'POST':
         form = PojistnaUdalostForm(request.POST)
