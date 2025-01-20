@@ -174,7 +174,7 @@ def smazat_pojistence(request, pk):
 
 @login_required
 #@user_passes_test(pojisteny)
-    def detail_pojistence(request, pk):
+def detail_pojistence(request, pk):
         pojistenec = get_object_or_404(Pojistenec, pk=pk)
         pojisteni = pojistenec.pojisteni.all()  # Získání všech pojištění pro daného pojištěnce
 
