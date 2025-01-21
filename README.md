@@ -16,6 +16,3 @@ https://evidence.pythonanywhere.com/ - fungující aplikace.
 - **SQLite** databáze (možná změna na jiný DB systém)
 
 
-## Budoucí plány:
-- Implementace pokročilého vyhledávání v pojištěních
-- Integrace s externími API pro získání pojistných událostí
