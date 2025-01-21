@@ -126,18 +126,31 @@ def detail_pojisteni(request, pk):
     pojisteni = get_object_or_404(Pojisteni, pk=pk)
     return render(request, 'pojistenci/detail_pojisteni.html', {'pojisteni': pojisteni})
 
+def filter(request, queryset):
+    jmeno = request.GET.get('jmeno', '')
+    prijmeni = request.GET.get('prijmeni', '')
+    if jmeno or prijmeni:
+        queryset = queryset.filter(jmeno__icontains=jmeno, prijmeni__icontains=prijmeni)
+
+    if request.GET.get('seradit') == 'true':  # Pokud je aktivováno třídění
+        order_by = request.GET.get('order_by', 'jmeno')
+        order_direction = request.GET.get('order_direction', 'asc')
+
+        if order_by == 'jmeno':
+            if order_direction == 'asc':
+                queryset = queryset.order_by('jmeno')
+            else:
+                queryset = queryset.order_by('-jmeno')
+    return queryset
+
 @login_required
 #@user_passes_test(admin)
 def seznam_pojistencu(request):
     vyhledavaci_form = VyhledavaciForm()
     pojistenci = Pojistenec.objects.all()
-    filterset = PojistenecFilter(request.GET, queryset=pojistenci)
+    #filterset = PojistenecFilter(request.GET, queryset=pojistenci)
 
-    order_by = request.GET.get('order_by', 'jmeno')  # Defaultně podle jména
-    order_direction = request.GET.get('order_direction', 'asc')  # Defaultně vzestupně
-    if order_direction == 'desc':
-        order_by = f"-{order_by}"
-    pojistenci = pojistenci.order_by(order_by)
+    pojistenci = filter(request, pojistenci)
 
     if request.GET.get('jmeno') or request.GET.get('prijmeni'):
         jmeno = request.GET.get('jmeno')
@@ -156,9 +169,9 @@ def seznam_pojistencu(request):
     return render(request, 'pojistenci/seznam_pojistencu.html', {
         'vyhledavaci_form': vyhledavaci_form,
         'page_obj': page_obj,
-        'filterset': filterset,
-        'order_by': order_by,
-        'order_direction': order_direction,
+        #'filterset': filterset,
+        #'order_by': order_by,
+        #'order_direction': order_direction,
     })
 
 @login_required

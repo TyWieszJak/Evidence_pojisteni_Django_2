@@ -14,14 +14,12 @@
     <a href="{% url 'pridat_pojistence' %}" class="btn">Přidat pojištěnce</a>
 
     <form method="GET" class="vyhledavaci-form">
-        <!-- Formulář pro vyhledávání -->
         <div class="vyhledavaci-form-section">
             {{ vyhledavaci_form.jmeno.label_tag }} {{ vyhledavaci_form.jmeno }}
             {{ vyhledavaci_form.prijmeni.label_tag }} {{ vyhledavaci_form.prijmeni }}
             <button type="submit">Hledat</button>
         </div>
 
-        <!-- Formulář pro třídění -->
         <div class="vyhledavaci-form-section">
             <label for="order_by">Seřadit:</label>
             <select name="order_by" id="order_by">
@@ -34,7 +32,7 @@
                 <option value="desc" {% if request.GET.order_direction == 'desc' %}selected{% endif %}>Sestupně</option>
             </select>
 
-            <button type="submit">Seřadit</button>
+            <button type="submit" value="true" name="seradit">Seřadit</button>
         </div>
     </form>
 
