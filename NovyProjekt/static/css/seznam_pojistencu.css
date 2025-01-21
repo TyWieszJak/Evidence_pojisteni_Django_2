@@ -139,9 +139,18 @@ table tr:hover {
 .vyhledavaci-form {
     display: inline-flex;
     align-items: center;
-    margin-left: 200px;
-
+    margin: auto;
+    max-width: auto;
 }
+.vyhledavaci-form-section {
+    margin-bottom: 20px;
+}
+
+.vyhledavaci-form select,
+.vyhledavaci-form button {
+    margin: 10px;
+}
+
 
 .vyhledavaci-form label {
     margin-right: 10px;

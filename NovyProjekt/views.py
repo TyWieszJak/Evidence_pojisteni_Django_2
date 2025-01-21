@@ -3,7 +3,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 from django.shortcuts import render,get_object_or_404, redirect
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-
+from .filters import PojistenecFilter
 from .models import Pojistenec, Pojisteni, PojistnaUdalost , Uzivatel
 from .forms import PojistenecForm, VyhledavaciForm, PridaniForm, PojistnaUdalostForm
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -131,6 +131,13 @@ def detail_pojisteni(request, pk):
 def seznam_pojistencu(request):
     vyhledavaci_form = VyhledavaciForm()
     pojistenci = Pojistenec.objects.all()
+    filterset = PojistenecFilter(request.GET, queryset=pojistenci)
+
+    order_by = request.GET.get('order_by', 'jmeno')  # Defaultně podle jména
+    order_direction = request.GET.get('order_direction', 'asc')  # Defaultně vzestupně
+    if order_direction == 'desc':
+        order_by = f"-{order_by}"
+    pojistenci = pojistenci.order_by(order_by)
 
     if request.GET.get('jmeno') or request.GET.get('prijmeni'):
         jmeno = request.GET.get('jmeno')
@@ -149,6 +156,9 @@ def seznam_pojistencu(request):
     return render(request, 'pojistenci/seznam_pojistencu.html', {
         'vyhledavaci_form': vyhledavaci_form,
         'page_obj': page_obj,
+        'filterset': filterset,
+        'order_by': order_by,
+        'order_direction': order_direction,
     })
 
 @login_required
