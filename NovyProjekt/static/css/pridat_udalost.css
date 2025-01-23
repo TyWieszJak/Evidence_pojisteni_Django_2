@@ -1,6 +1,4 @@
-/* pridat_udalost.css */
 
-/* Kontejner pro přidání pojistné události */
 .container-pridat {
     max-width: 500px;
     margin: 40px auto;
@@ -10,7 +8,6 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Nadpis */
 .container-pridat h2 {
     text-align: center;
     color: #333;
@@ -18,7 +15,6 @@
     font-size: 1.5em;
 }
 
-/* Styl pro formulářová pole */
 form {
     display: flex;
     flex-direction: column;
@@ -38,7 +34,6 @@ form input:focus, form select:focus, form textarea:focus {
     outline: none;
 }
 
-/* Styl tlačítka pro odeslání */
 form button.btn {
     padding: 10px 20px;
     background-color: #007bff;

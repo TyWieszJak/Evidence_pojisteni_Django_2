@@ -1,4 +1,4 @@
-/* Kontejner pro úpravu pojistné události */
+
 .container-uprav_udalost {
     max-width: 600px;
     margin: 0 auto;
@@ -8,7 +8,6 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Nadpis */
 .container-uprav_udalost h2 {
     text-align: center;
     color: #333;
@@ -16,7 +15,6 @@
     font-size: 2em;
 }
 
-/* Styl pro formulářová pole */
 form {
     display: flex;
     flex-direction: column;
@@ -35,7 +33,6 @@ form input:focus, form select:focus, form textarea:focus {
     outline: none;
 }
 
-/* Styl tlačítka pro odeslání */
 form button.btn {
     padding: 12px 25px;
     background-color: #007bff;

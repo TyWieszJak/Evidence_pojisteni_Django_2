@@ -1,6 +1,4 @@
-/* upravit_pojisteni.css */
 
-/* Kontejner pro úpravu pojištění */
 .container_uprav_pojisteni {
     max-width: 600px;
     margin: 0 auto;
@@ -10,7 +8,6 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Nadpis pro úpravu pojištění */
 .container_uprav_pojisteni h1 {
     text-align: center;
     font-size: 2.2em;
@@ -18,7 +15,6 @@
     color: #333;
 }
 
-/* Styl pro formulářová pole */
 form {
     display: flex;
     flex-direction: column;
@@ -38,7 +34,6 @@ form input:focus, form select:focus, form textarea:focus {
     outline: none;
 }
 
-/* Tlačítko pro uložení změn */
 form button[type="submit"] {
     padding: 12px 20px;
     background-color: #007bff;
@@ -55,7 +50,6 @@ form button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-/* Tlačítka pro návrat */
 a.btn-secondary {
     display: inline-block;
     padding: 10px 15px;

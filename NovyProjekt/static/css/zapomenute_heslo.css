@@ -1,4 +1,4 @@
-/* Kontejner pro celou stránku pro reset hesla */
+
 .container_zapomenute_heslo {
     max-width: 400px;
     margin: 0 auto;
@@ -9,13 +9,11 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Nadpis pro stránku resetování hesla */
 .container_zapomenute_heslo h2 {
     text-align: center;
     color: #333;
 }
 
-/* Styl pro chybové zprávy */
 .error-messages {
     color: #f44336;
     font-size: 14px;
@@ -26,12 +24,11 @@
     margin: 5px 0;
 }
 
-/* Styl pro formulář */
+
 .container_zapomenute_heslo form {
     margin-top: 20px;
 }
 
-/* Styl pro tlačítko pro odeslání formuláře */
 .container_zapomenute_heslo .btn {
     display: block;
     width: 100%;

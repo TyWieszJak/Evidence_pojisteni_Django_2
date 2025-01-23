@@ -1,6 +1,4 @@
-/* prihlaseni.css */
 
-/* Kontejner pro přihlášení */
 .container-prihlaseni {
     max-width: 400px;
     margin: 50px auto;
@@ -10,19 +8,16 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Nadpis */
 .container-prihlaseni h2 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
 }
 
-/* Skupina formuláře */
 .form-group {
     margin-bottom: 15px;
 }
 
-/* Styl pro formulářová pole */
 input[type="text"], input[type="password"] {
     width: 100%;
     padding: 10px;
@@ -31,13 +26,11 @@ input[type="text"], input[type="password"] {
     transition: border-color 0.3s ease;
 }
 
-/* Změna barvy při zaostření */
 input[type="text"]:focus, input[type="password"]:focus {
     border-color: #0056b3;
     outline: none;
 }
 
-/* Styl tlačítka pro odeslání */
 button.btn {
     padding: 10px 20px;
     background-color: #007bff;
@@ -50,12 +43,10 @@ button.btn {
     transition: background-color 0.3s ease;
 }
 
-/* Změna barvy při najetí myší */
 button.btn:hover {
     background-color: #0056b3;
 }
 
-/* Styl pro odkazy */
 .odkazy {
     text-align: center;
     margin-top: 20px;

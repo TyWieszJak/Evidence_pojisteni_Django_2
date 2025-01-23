@@ -1,6 +1,4 @@
-/* pojistne_udalosti.css */
 
-/* Hlavní nadpis */
 h1 {
     font-size: 2em;
     margin-bottom: 20px;
@@ -8,7 +6,6 @@ h1 {
     color: #007bff;
 }
 
-/* Tlačítko pro přidání události */
 .btn {
     background-color: #007bff;
     color: white;
@@ -23,7 +20,6 @@ h1 {
     background-color: #0056b3;
 }
 
-/* Tabulka */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -31,7 +27,6 @@ table {
     font-size: 1em;
 }
 
-/* Záhlaví tabulky */
 thead {
     background-color: #007bff;
     color: white;
@@ -43,7 +38,6 @@ thead th {
     border-bottom: 1px solid #dee2e6;
 }
 
-/* Řádky tabulky */
 tbody tr {
     border-bottom: 1px solid #dee2e6;
     transition: background-color 0.3s;
@@ -53,13 +47,11 @@ tbody tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Buňky tabulky */
 td {
     padding: 15px;
     text-align: left;
 }
 
-/* Akce (Upravit, Smazat) */
 td a {
     color: #007bff;
     text-decoration: none;
@@ -67,13 +59,11 @@ td a {
 }
 
 
-/* Mezera mezi řádky */
 tbody td {
     padding-top: 20px;
     padding-bottom: 20px;
 }
 
-/* Stránkování */
 .pagination {
     text-align: center;
     margin-top: 20px;
@@ -110,7 +100,6 @@ td .delete-btn {
     border-color: #007bff;
 }
 
-/* Hover efekty pro tlačítka */
 td .edit-btn:hover {
     background-color: #ffa500;
     color: white;
@@ -123,7 +112,6 @@ td .delete-btn:hover {
     border-color: #dc3545;
 }
 
-/* Mezera mezi řádky */
 tbody td {
     padding-top: 20px;
     padding-bottom: 20px;

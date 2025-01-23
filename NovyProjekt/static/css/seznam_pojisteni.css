@@ -73,7 +73,6 @@ td:last-child {
     padding-right: 20px;
 }
 
-/* Základní styly pro paginaci */
 .pagination {
     display: flex;
     justify-content: center;
@@ -110,7 +109,6 @@ td:last-child {
     border-radius: 4px;
 }
 
-/* Styles for the "first", "last", "next", and "previous" buttons */
 .step-links a:disabled {
     color: #ccc;
     pointer-events: none;
@@ -118,7 +116,6 @@ td:last-child {
 }
 
 
-/* Základní styly pro tlačítka "Upravit" a "Smazat" */
 .pojistenci-actions {
     text-align: right;
 }
@@ -134,19 +131,16 @@ td:last-child {
     transition: all 0.3s ease;
 }
 
-/* Efekt hover pro tlačítko "Upravit" */
 .pojistenci-actions a:first-child:hover {
     background-color: #007bff;
     color: #fff;
 }
 
-/* Efekt hover pro tlačítko "Smazat" */
 .pojistenci-actions a:last-child:hover {
     background-color: #c9302c;
     color: #fff;
 }
 
-/* Styl pro aktivní tlačítko, pokud je potřeba */
 .pojistenci-actions a:active {
     transform: translateY(2px);
 }
