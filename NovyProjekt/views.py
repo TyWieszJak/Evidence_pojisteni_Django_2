@@ -28,7 +28,7 @@ def pojisteny(user):
 
 @login_required
 #@user_passes_test(pojisteny)
-def vytvor_ualost(request):
+def vytvor_udalost(request):
     if request.method == 'POST':
         form = PojistnaUdalostForm(request.POST)
         if form.is_valid():
@@ -42,7 +42,7 @@ def vytvor_ualost(request):
 
 @login_required
 #@user_passes_test(pojisteny)
-def seznam_ualosti(request):
+def seznam_udalosti(request):
     events = PojistnaUdalostForm.objects.filter(pojistenec=request.user)  # Pouze události přihlášeného uživatele
     return render(request, 'pojistne_udalosti/event_list.html', {'events': events})
 
@@ -148,9 +148,14 @@ def filter(request, queryset):
 def seznam_pojistencu(request):
     vyhledavaci_form = VyhledavaciForm()
     pojistenci = Pojistenec.objects.all()
+
     #filterset = PojistenecFilter(request.GET, queryset=pojistenci)
 
-    pojistenci = filter(request, pojistenci)
+    order_by = request.GET.get('order_by', 'jmeno')
+    order_direction = request.GET.get('order_direction', 'asc')
+    if order_direction == 'desc':
+        order_by = f'-{order_by}'
+    pojistenci = Pojistenec.objects.all().order_by(order_by)
 
     if request.GET.get('jmeno') or request.GET.get('prijmeni'):
         jmeno = request.GET.get('jmeno')
@@ -170,8 +175,8 @@ def seznam_pojistencu(request):
         'vyhledavaci_form': vyhledavaci_form,
         'page_obj': page_obj,
         #'filterset': filterset,
-        #'order_by': order_by,
-        #'order_direction': order_direction,
+        'order_by': request.GET.get('order_by', 'jmeno'),
+        'order_direction': request.GET.get('order_direction', 'asc'),
     })
 
 @login_required

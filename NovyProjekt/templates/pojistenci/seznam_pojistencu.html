@@ -11,28 +11,14 @@
     <h1>Seznam pojištěnců</h1>
     <div style="margin-top: 20px;"></div>
 
-    <a href="{% url 'pridat_pojistence' %}" class="btn">Přidat pojištěnce</a>
+
 
     <form method="GET" class="vyhledavaci-form">
         <div class="vyhledavaci-form-section">
+            <a href="{% url 'pridat_pojistence' %}" class="btn">Přidat pojištěnce</a>
             {{ vyhledavaci_form.jmeno.label_tag }} {{ vyhledavaci_form.jmeno }}
             {{ vyhledavaci_form.prijmeni.label_tag }} {{ vyhledavaci_form.prijmeni }}
             <button type="submit">Hledat</button>
-        </div>
-
-        <div class="vyhledavaci-form-section">
-            <label for="order_by">Seřadit:</label>
-            <select name="order_by" id="order_by">
-                <option value="jmeno" {% if request.GET.order_by == 'jmeno' %}selected{% endif %}>Jméno</option>
-            </select>
-
-            <label for="order_direction">Směr:</label>
-            <select name="order_direction" id="order_direction">
-                <option value="asc" {% if request.GET.order_direction == 'asc' %}selected{% endif %}>Vzestupně</option>
-                <option value="desc" {% if request.GET.order_direction == 'desc' %}selected{% endif %}>Sestupně</option>
-            </select>
-
-            <button type="submit" value="true" name="seradit">Seřadit</button>
         </div>
     </form>
 
@@ -41,51 +27,63 @@
 
     {% if page_obj %}
 
-        <table>
-            <thead>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <a href="?order_by=jmeno&order_direction={% if request.GET.order_by == 'jmeno' and request.GET.order_direction == 'asc' %}desc{% else %}asc{% endif %}">
+                        Jméno
+                    </a>
+                </th>
+                <th>
+                    <a href="?order_by=prijmeni&order_direction={% if request.GET.order_by == 'prijmeni' and request.GET.order_direction == 'asc' %}desc{% else %}asc{% endif %}">
+                        Příjmení
+                    </a>
+                </th>
+                <th>
+                    <a href="?order_by=adresa&order_direction={% if request.GET.order_by == 'adresa' and request.GET.order_direction == 'asc' %}desc{% else %}asc{% endif %}">
+                        Adresa
+                    </a>
+                </th>
+                <th>Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pojistenec in page_obj %}
                 <tr>
-                    <th>Jméno</th>
-                    <th>Příjmení</th>
-                    <th>Adresa</th>
-                    <th>Akce</th>
+                    <td>{{ pojistenec.jmeno }}</td>
+                    <td>{{ pojistenec.prijmeni }}</td>
+                    <td>{{ pojistenec.adresa }}</td>
+                    <td>
+                        <div class="pojistenci-actions">
+                            <a href="{% url 'detail_pojistence' pojistenec.pk %}">Detail</a>
+                            <a href="{% url 'upravit_pojistence' pojistenec.pk %}">Upravit</a>
+                            <a href="{% url 'smazat_pojistence' pojistenec.pk %}">Smazat</a>
+                        </div>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                {% for pojistenec in page_obj %}
-                    <tr>
-                        <td>{{ pojistenec.jmeno }}</td>
-                        <td>{{ pojistenec.prijmeni }}</td>
-                        <td>{{ pojistenec.adresa }}</td>
-                        <td>
-                            <div class="pojistenci-actions">
-                                <a href="{% url 'detail_pojistence' pojistenec.pk %}">Detail</a>
-                                <a href="{% url 'upravit_pojistence' pojistenec.pk %}">Upravit</a>
-                                <a href="{% url 'smazat_pojistence' pojistenec.pk %}">Smazat</a>
-                            </div>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            {% endfor %}
+        </tbody>
+    </table>
 
-        <!-- Paginace -->
-        <div class="pagination">
-            <span class="step-links">
-                {% if page_obj.has_previous %}
-                    <a href="?page=1&order_by={{ request.GET.order_by }}">První</a>
-                    <a href="?page={{ page_obj.previous_page_number }}&order_by={{ request.GET.order_by }}">Předchozí</a>
-                {% endif %}
+    <!-- Paginace -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1&order_by={{ request.GET.order_by }}">První</a>
+                <a href="?page={{ page_obj.previous_page_number }}&order_by={{ request.GET.order_by }}">Předchozí</a>
+            {% endif %}
 
-                <span class="current">
-                    Stránka {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
-                </span>
-
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}&order_by={{ request.GET.order_by }}">Další</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}&order_by={{ request.GET.order_by }}">Poslední</a>
-                {% endif %}
+            <span class="current">
+                Stránka {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
             </span>
-        </div>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}&order_by={{ request.GET.order_by }}">Další</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}&order_by={{ request.GET.order_by }}">Poslední</a>
+            {% endif %}
+        </span>
+    </div>
 
 
     {% else %}

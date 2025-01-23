@@ -1,82 +1,84 @@
 .container-seznam_pojistenci {
     width: 100%;
-    max-width: 800px; /* Maximální šířka kontejneru */
-    margin: 20px auto; /* Centrovat kontejner */
+    max-width: 800px;
+    margin: 20px auto;
     padding: 30px;
-    background-color: #f9f9f9; /* Světle šedé pozadí */
+    background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 ,h1{
     text-align: center;
-    color: #007bff; /* Barva nadpisu */
+    color: #007bff;
     margin-bottom: 20px;
 }
 
 table {
-    width: 100%; /* Tabulka zabírá celou šířku kontejneru */
-    border-collapse: collapse; /* Sloučit okraje buněk */
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 20px;
+    border-bottom: 1px solid #ddd;
+    border-radius: 10px;
 }
 
 table th, table td {
     padding: 15px;
-    text-align: left; /* Zarovnat text vlevo */
-    border-bottom: 1px solid #ddd; /* Spodní okraj buněk */
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-/* Zarovnání nadpisu "Akce" více doprava v záhlaví tabulky */
 th:last-child {
-    text-align: center; /* Zarovnání nadpisu doprava */
-    padding-right: 20px; /* Přidání odsazení od pravého okraje */
+    text-align: center;
+    padding-right: 20px;
 }
-
+table th a {
+    text-decoration: none;
+    color: white;
+}
 
 table th {
-    background-color: #007bff; /* Barva hlavičky tabulky */
-    color: white; /* Barva textu hlavičky */
+    background-color: #007bff;
+    color: white;
+
 }
 
 table tr:hover {
-    background-color: #f1f1f1; /* Barva řádku při hoveru */
+    background-color: #f1f1f1;
 }
 
 .pojistenci-actions {
-    text-align: right; /* Zarovnání tlačítek doprava */
+    text-align: right;
 }
 
 .pojistenci-actions a {
     display: inline-block;
-    padding: 8px 16px; /* Menší padding pro decentní vzhled */
-    margin: 0 5px; /* Mezera mezi tlačítky */
-    text-decoration: none; /* Odstranění podtržení textu */
-    color: #007bff; /* Modrý text */
-    border: 1px solid #007bff; /* Modrý rámeček */
-    border-radius: 4px; /* Mírně zaoblené rohy */
-    transition: all 0.3s ease; /* Hladký přechod pro hover efekt */
+    padding: 8px 16px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    transition: all 0.3s ease;
 }
 
-/* Efekt hover pro tlačítko "Detail" */
+
 .pojistenci-actions a:first-child:hover {
     background-color: #007bff;
     color: #fff;
 }
 
-/* Efekt hover pro tlačítko "Upravit" */
 .pojistenci-actions a:nth-child(2):hover {
     background-color: #ff851b;
     color: #fff;
 }
 
-/* Efekt hover pro tlačítko "Smazat" */
 .pojistenci-actions a:last-child:hover {
     background-color: #c9302c;
     color: #fff;
 }
 
 
-/* Základní styly pro paginaci */
 .pagination {
     display: flex;
     justify-content: center;
@@ -107,7 +109,6 @@ table tr:hover {
     border-radius: 4px;
 }
 
-/* Styly pro tlačítka "Upravit" a "Smazat" */
 .pojistenci-actions a:active {
     transform: translateY(2px);
 }
@@ -135,20 +136,21 @@ table tr:hover {
     transform: scale(0.95);
 }
 
-/* Styl pro formulář vyhledávání */
 .vyhledavaci-form {
-    display: inline-flex;
+    display: flex;
+    justify-content: space-evenly;
     align-items: center;
-    margin: auto;
-    max-width: auto;
 }
 .vyhledavaci-form-section {
     margin-bottom: 20px;
 }
-
+.vyhledavaci-form a,
 .vyhledavaci-form select,
 .vyhledavaci-form button {
-    margin: 10px;
+    flex: 1;
+    margin: 0 50px;
+    max-width: 200px; /* Maximální šířka prvků */
+    min-width: 100px; /* Minimální šířka prvků */
 }
 
 
