@@ -35,8 +35,10 @@ class PojistenecAdmin(admin.ModelAdmin):
 # Registrace modelu Pojisteni
 @admin.register(Pojisteni)
 class PojisteniAdmin(admin.ModelAdmin):
-    list_display = ('pojistenec', 'typ_pojisteni', 'datum_sjednani', 'platnost_do', 'castka')
-    search_fields = ('typ_pojisteni', 'pojistenec__jmeno', 'pojistenec__prijmeni')
+    list_display = ('pojistenec', 'typ_pojisteni',
+                    'datum_sjednani', 'platnost_do', 'castka')
+    search_fields = ('typ_pojisteni', 'pojistenec__jmeno',
+                     'pojistenec__prijmeni')
     list_filter = ('typ_pojisteni', 'datum_sjednani')
     ordering = ('-datum_sjednani',)
 

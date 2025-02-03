@@ -4,7 +4,8 @@ from .models import Pojistenec
 
 class PojistenecFilter(django_filters.FilterSet):
     jmeno = django_filters.CharFilter(lookup_expr='icontains', label="Jméno")
-    prijmeni = django_filters.CharFilter(lookup_expr='icontains', label="Příjmení")
+    prijmeni = django_filters.CharFilter(lookup_expr='icontains',
+                                         label="Příjmení")
 
     # Přidání možnosti pro třídění
     order_by = django_filters.ChoiceFilter(
