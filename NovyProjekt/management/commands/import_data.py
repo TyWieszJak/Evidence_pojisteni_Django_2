@@ -1,7 +1,6 @@
-import csv
 from django.core.management.base import BaseCommand
-from NovyProjekt.models import Pojistenec, Uzivatel
-
+from NovyProjekt.models import Pojistenec
+import csv
 
 class Command(BaseCommand):
     help = 'Importuje data z CSV souboru do modelu Pojistenec bez propojování s Uživatelem'

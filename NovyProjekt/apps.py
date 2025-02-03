@@ -5,5 +5,5 @@ class NovyprojektConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'NovyProjekt'
 
-    def ready(self):
-        import NovyProjekt.signals  # Registrace signálů
+   # def ready(self):
+   #     import NovyProjekt.signals
