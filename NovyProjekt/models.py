@@ -18,6 +18,7 @@ class UzivatelManager(BaseUserManager):
     def create_superuser(self, email, first_name, last_name, password=None):
         user = self.create_user(email, first_name, last_name, password)
         user.is_admin = True
+        user.is_superuser = True
         user.save(using=self._db)
         return user
 
@@ -28,6 +29,7 @@ class Uzivatel(AbstractBaseUser):
     last_name = models.CharField(max_length=50, default="")
     email = models.EmailField(max_length=300, unique=True)
     is_admin = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     last_login = models.DateTimeField(default=timezone.now)
     date_joined = models.DateTimeField(default=timezone.now)
@@ -101,8 +103,7 @@ class PojistnaUdalost(models.Model):
         ('ceka_na_schvaleni', 'Čeká na schválení'),
     ]
 
-    pojisteni = models.ForeignKey(Pojisteni, on_delete=models.CASCADE,
-                                  related_name='udalosti')
+    pojisteni = models.ForeignKey(Pojisteni, on_delete=models.CASCADE, related_name='udalosti')
     datum_udalosti = models.DateField()
     popis = models.TextField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
