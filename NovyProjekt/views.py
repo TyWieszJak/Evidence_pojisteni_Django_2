@@ -3,14 +3,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render,get_object_or_404, redirect
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .models import Pojistenec, Pojisteni, PojistnaUdalost , Uzivatel
-from .forms import PojistenecForm, VyhledavaciForm, PridaniForm, PojistnaUdalostForm
-from django.contrib.auth.decorators import login_required, user_passes_test
+from .forms import PojistenecForm, VyhledavaciForm, UzivatelForm
+from .forms import PridaniForm, PojistnaUdalostForm
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
 from django.contrib import messages
-from .forms import  UzivatelForm
 from django.views import View
 from django.contrib.auth import authenticate, login , logout
-from django.contrib.auth.models import User , Group
+from django.contrib.auth.models import User
 import logging
 
 logger = logging.getLogger(__name__)
@@ -18,12 +18,14 @@ logger = logging.getLogger(__name__)
 
 def admin(user):
     return user.groups.filter(name='Administrators').exists()
+
+
 def pojisteny(user):
     return user.groups.filter(name='Insured').exists()
 
 
 @login_required
-#@user_passes_test(pojisteny)
+# @user_passes_test(pojisteny)
 def vytvor_udalost(request):
     if request.method == 'POST':
         form = PojistnaUdalostForm(request.POST)

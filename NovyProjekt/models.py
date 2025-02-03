@@ -9,7 +9,8 @@ class UzivatelManager(BaseUserManager):
         if not email:
             raise ValueError("Uživatel musí mít emailovou adresu.")
         email = self.normalize_email(email)
-        user = self.model(email=email, first_name=first_name, last_name=last_name)
+        user = self.model(email=email, first_name=first_name,
+                          last_name=last_name)
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -35,7 +36,7 @@ class Uzivatel(AbstractBaseUser):
     objects = UzivatelManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']  # Uživatelské jméno je email, takže ho neuvádíme v REQUIRED_FIELDS
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -53,7 +54,8 @@ class Uzivatel(AbstractBaseUser):
 
 # Model Pojistenec
 class Pojistenec(models.Model):
-    user = models.ForeignKey(Uzivatel, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(Uzivatel, on_delete=models.CASCADE,
+                             null=True, blank=True)
     jmeno = models.CharField(max_length=100)
     prijmeni = models.CharField(max_length=100)
     adresa = models.CharField(max_length=255)
@@ -79,7 +81,8 @@ class Pojisteni(models.Model):
         ('podnikani', 'Pojištění podnikatelských rizik'),
     ]
 
-    pojistenec = models.ForeignKey(Pojistenec, on_delete=models.CASCADE, related_name='pojisteni')
+    pojistenec = models.ForeignKey(Pojistenec, on_delete=models.CASCADE,
+                                   related_name='pojisteni')
     typ_pojisteni = models.CharField(max_length=50, choices=POJISTENI_CHOICES)
     predmet_pojisteni = models.CharField(max_length=100)
     datum_sjednani = models.DateField()
@@ -88,7 +91,6 @@ class Pojisteni(models.Model):
 
     def __str__(self):
         return f" {self.pojistenec}"
-
 
 
 # Model PojistnaUdalost
