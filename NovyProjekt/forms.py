@@ -4,6 +4,7 @@ from .models import Pojistenec, Pojisteni, PojistnaUdalost, Uzivatel
 
 class UzivatelForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
+
     class Meta:
 
         model = Uzivatel
@@ -16,42 +17,42 @@ class UzivatelForm(forms.ModelForm):
             user.save()
         return user
 
-class PojistenecForm(forms.ModelForm):
 
+class PojistenecForm(forms.ModelForm):
 
     class Meta:
         model = Pojistenec
         fields = ['jmeno', 'prijmeni', 'adresa', 'vek', 'foto']
 
-class PridaniForm(forms.ModelForm):
 
+class PridaniForm(forms.ModelForm):
 
     class Meta:
         model = Pojisteni
         fields = ['typ_pojisteni', "predmet_pojisteni",
                   'datum_sjednani', 'platnost_do', 'castka']
 
-class VyhledavaciForm(forms.Form):
 
+class VyhledavaciForm(forms.Form):
 
     jmeno = forms.CharField(required=False, label='Jméno')
     prijmeni = forms.CharField(required=False, label='Příjmení')
 
-class PojistnaUdalostForm(forms.ModelForm):
 
+class PojistnaUdalostForm(forms.ModelForm):
 
     class Meta:
         model = PojistnaUdalost
         fields = ['pojisteni', 'datum_udalosti',
                   'popis', 'status', 'castka']
 
-class ZapomenuteHesloForm(forms.Form):
 
+class ZapomenuteHesloForm(forms.Form):
 
     email = forms.EmailField(label='E-mail', max_length=254)
 
-class SetPasswordForm(forms.Form):
 
+class SetPasswordForm(forms.Form):
 
     new_password1 = forms.CharField(
         label='Nové heslo',  # Měníme název pro první pole
