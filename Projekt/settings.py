@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
-import  os
-
+import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -79,7 +78,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        #'DIRS': [],
+        # 'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -151,6 +150,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/pojistenci/prihlaseni/'
-#LOGIN_REDIRECT_URL = 'pojistenci/seznam_pojistencu'
-
+# LOGIN_REDIRECT_URL = 'pojistenci/seznam_pojistencu'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

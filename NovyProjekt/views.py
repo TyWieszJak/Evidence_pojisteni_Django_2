@@ -74,7 +74,7 @@ def seznam_pojisteni(request):
 @login_required
 # @user_passes_test(admin)
 def pridat_pojisteni(request, pk):
-    pojistenec = get_object_or_404(Pojistenec, pk = pk)
+    pojistenec = get_object_or_404(Pojistenec, pk=pk)
     if request.method == "POST":
         form = PridaniForm(request.POST)
         if form.is_valid():
@@ -102,7 +102,7 @@ def upravit_pojisteni(request, pk):
     else:
         form = PridaniForm(instance=pojisteni)
 
-    return render(request, 'pojistenci/upravit_pojisteni.html', {'form': form, 'pojistenec': pojistenec,'pojisteni': pojisteni,})
+    return render(request, 'pojistenci/upravit_pojisteni.html', {'form': form, 'pojistenec': pojistenec, 'pojisteni': pojisteni})
 
 
 @login_required
@@ -177,7 +177,7 @@ def seznam_pojistencu(request):
     return render(request, 'pojistenci/seznam_pojistencu.html', {
         'vyhledavaci_form': vyhledavaci_form,
         'page_obj': page_obj,
-        #'filterset': filterset,
+        # 'filterset': filterset,
         'order_by': request.GET.get('order_by', 'jmeno'),
         'order_direction': request.GET.get('order_direction', 'asc'),
     })
@@ -211,7 +211,7 @@ def detail_pojistence(request, pk):
 def upravit_pojistence(request, pk):
     pojistenec = get_object_or_404(Pojistenec, pk=pk)
     if request.method == 'POST':
-        form = PojistenecForm(request.POST,request.FILES, instance=pojistenec)
+        form = PojistenecForm(request.POST, request.FILES, instance=pojistenec)
         if form.is_valid():
             form.save()
             return redirect('seznam_pojistencu')
@@ -225,11 +225,10 @@ def upravit_pojistence(request, pk):
 # @user_passes_test(admin)
 def pridat_pojistence(request):
     if request.method == 'POST':
-        form = PojistenecForm(request.POST,request.FILES)
+        form = PojistenecForm(request.POST, request.FILES)
         if form.is_valid():
             print("Formulář je validní")
             pojistenec = form.save(commit=False)
-           # pojistenec.user = request.user
             pojistenec.save()
             form.save()
             return redirect('seznam_pojistencu')
@@ -260,7 +259,7 @@ class Zapomenute_Heslo(View):
                 for user in users:
                     token = default_token_generator.make_token(user)
                     uidb64 = urlsafe_base64_encode(str(user.pk).encode())
-                    #reset_link = request.build_absolute_uri(reverse('password_reset_confirm', args=[uidb64, token]))
+                    # reset_link = request.build_absolute_uri(reverse('password_reset_confirm', args=[uidb64, token]))
                     """
                     send_mail(
                         'Obnovení hesla',
@@ -309,7 +308,7 @@ class PasswordResetConfirmView(View):
                     messages.success(request, 'Vaše heslo bylo úspěšně obnoveno.')
                     return redirect('zapomenute_heslo')
                 else:
-                    #print(form.errors)
+                    # print(form.errors)
                     messages.error(request, "Formulář obsahuje chyby.")
                     return render(request, 'pojistenci/password_reset_confirm.html', {'form': form, 'uidb64': uidb64, 'token': token})
             else:
