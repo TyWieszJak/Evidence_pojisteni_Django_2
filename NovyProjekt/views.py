@@ -349,6 +349,7 @@ def registrace(request):
         form = UzivatelForm(request.POST)
         if form.is_valid():
             user = form.save()
+            user.save()
             messages.success(request, 'Účet byl úspěšně vytvořen!')
             return redirect('prihlaseni')
     else:
