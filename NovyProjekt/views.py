@@ -1,18 +1,14 @@
 from django.contrib.auth.tokens import default_token_generator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import JsonResponse
 from django.shortcuts import render,get_object_or_404, redirect
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from .filters import PojistenecFilter
 from .models import Pojistenec, Pojisteni, PojistnaUdalost , Uzivatel
 from .forms import PojistenecForm, VyhledavaciForm, PridaniForm, PojistnaUdalostForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
 from django.contrib import messages
-from .forms import ZapomenuteHesloForm, UzivatelForm
-from django.core.mail import send_mail
+from .forms import  UzivatelForm
 from django.views import View
-from django.urls import reverse
 from django.contrib.auth import authenticate, login , logout
 from django.contrib.auth.models import User , Group
 import logging
@@ -35,7 +31,7 @@ def vytvor_udalost(request):
             event = form.save(commit=False)
             event.pojistenec = request.user  # Událost se váže na přihlášeného uživatele
             event.save()
-            return redirect('seznam_udalosti')  # Redirect na seznam pojistných událostí
+            return redirect('seznam_udalosti')
     else:
         form = PojistnaUdalostForm()
     return render(request, 'pojistne_udalosti/create_event.html', {'form': form})
