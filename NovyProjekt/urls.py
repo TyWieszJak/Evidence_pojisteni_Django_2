@@ -2,10 +2,6 @@ from django.contrib.auth.views import PasswordResetDoneView, PasswordResetView, 
     PasswordResetCompleteView
 from django.urls import path
 from . import views
-from .views import seznam_pojistencu
-
-from django.urls import path
-from . import views
 
 
 urlpatterns = [

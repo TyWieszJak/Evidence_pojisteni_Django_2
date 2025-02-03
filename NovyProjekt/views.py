@@ -1,15 +1,15 @@
 from django.contrib.auth.tokens import default_token_generator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render,get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from .models import Pojistenec, Pojisteni, PojistnaUdalost , Uzivatel
+from .models import Pojistenec, Pojisteni, PojistnaUdalost, Uzivatel
 from .forms import PojistenecForm, VyhledavaciForm, UzivatelForm
 from .forms import PridaniForm, PojistnaUdalostForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
 from django.contrib import messages
 from django.views import View
-from django.contrib.auth import authenticate, login , logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 import logging
 
@@ -31,21 +31,24 @@ def vytvor_udalost(request):
         form = PojistnaUdalostForm(request.POST)
         if form.is_valid():
             event = form.save(commit=False)
-            event.pojistenec = request.user  # Událost se váže na přihlášeného uživatele
+            event.pojistenec = request.user
             event.save()
             return redirect('seznam_udalosti')
     else:
         form = PojistnaUdalostForm()
-    return render(request, 'pojistne_udalosti/create_event.html', {'form': form})
+    return render(request, 'pojistne_udalosti/create_event.html',
+                  {'form': form})
+
 
 @login_required
-#@user_passes_test(pojisteny)
+# @user_passes_test(pojisteny)
 def seznam_udalosti(request):
     events = PojistnaUdalostForm.objects.filter(pojistenec=request.user)  # Pouze události přihlášeného uživatele
     return render(request, 'pojistne_udalosti/event_list.html', {'events': events})
 
+
 @login_required
-#@user_passes_test(admin)
+# @user_passes_test(admin)
 def seznam_pojisteni(request):
     vyhledavaci_form = VyhledavaciForm(request.GET or None)
     pojisteni = Pojisteni.objects.all()
@@ -68,9 +71,8 @@ def seznam_pojisteni(request):
     })
 
 
-
 @login_required
-#@user_passes_test(admin)
+# @user_passes_test(admin)
 def pridat_pojisteni(request, pk):
     pojistenec = get_object_or_404(Pojistenec, pk = pk)
     if request.method == "POST":
@@ -85,8 +87,9 @@ def pridat_pojisteni(request, pk):
         form = PridaniForm()
     return render(request, 'pojistenci/pridat_pojisteni.html', {'form': form , 'pojistenec': pojistenec})
 
+
 @login_required
-#@user_passes_test(admin)
+# @user_passes_test(admin)
 def upravit_pojisteni(request, pk):
     pojisteni = get_object_or_404(Pojisteni, pk=pk)
     pojistenec = pojisteni.pojistenec  # Získání pojištěnce z pojištění
@@ -103,7 +106,7 @@ def upravit_pojisteni(request, pk):
 
 
 @login_required
-#@user_passes_test(admin)
+# @user_passes_test(admin)
 def smazat_pojisteni(request, pk):
     pojisteni = get_object_or_404(Pojisteni, pk=pk)
     pojistenec = pojisteni.pojistenec  # Získejte souvisejícího pojištěnce
@@ -119,10 +122,11 @@ def smazat_pojisteni(request, pk):
 
 
 @login_required
-#@user_passes_test(pojisteny)
+# @user_passes_test(pojisteny)
 def detail_pojisteni(request, pk):
     pojisteni = get_object_or_404(Pojisteni, pk=pk)
     return render(request, 'pojistenci/detail_pojisteni.html', {'pojisteni': pojisteni})
+
 
 def filter(request, queryset):
     jmeno = request.GET.get('jmeno', '')
@@ -141,13 +145,14 @@ def filter(request, queryset):
                 queryset = queryset.order_by('-jmeno')
     return queryset
 
+
 @login_required
-#@user_passes_test(admin)
+# @user_passes_test(admin)
 def seznam_pojistencu(request):
     vyhledavaci_form = VyhledavaciForm()
     pojistenci = Pojistenec.objects.all()
 
-    #filterset = PojistenecFilter(request.GET, queryset=pojistenci)
+    # filterset = PojistenecFilter(request.GET, queryset=pojistenci)
 
     order_by = request.GET.get('order_by', 'jmeno')
     order_direction = request.GET.get('order_direction', 'asc')
@@ -177,8 +182,9 @@ def seznam_pojistencu(request):
         'order_direction': request.GET.get('order_direction', 'asc'),
     })
 
+
 @login_required
-#@user_passes_test(admin)
+# @user_passes_test(admin)
 def smazat_pojistence(request, pk):
     pojistenec = get_object_or_404(Pojistenec, pk=pk)
     if request.method == 'POST':
@@ -186,8 +192,9 @@ def smazat_pojistence(request, pk):
         return redirect('seznam_pojistencu')
     return render(request, 'pojistenci/smazat_pojistence.html', {'pojistenec': pojistenec})
 
+
 @login_required
-#@user_passes_test(pojisteny)
+# @user_passes_test(pojisteny)
 def detail_pojistence(request, pk):
     pojistenec = get_object_or_404(Pojistenec, pk=pk)
     pojisteni = pojistenec.pojisteni.all()
@@ -198,8 +205,9 @@ def detail_pojistence(request, pk):
         'uzivatel': request.user
     })
 
+
 @login_required
-#@user_passes_test(pojisteny)
+# @user_passes_test(pojisteny)
 def upravit_pojistence(request, pk):
     pojistenec = get_object_or_404(Pojistenec, pk=pk)
     if request.method == 'POST':
@@ -212,8 +220,9 @@ def upravit_pojistence(request, pk):
 
     return render(request, 'pojistenci/upravit_pojistence.html', {'form': form})
 
+
 @login_required
-#@user_passes_test(admin)
+# @user_passes_test(admin)
 def pridat_pojistence(request):
     if request.method == 'POST':
         form = PojistenecForm(request.POST,request.FILES)
@@ -230,6 +239,7 @@ def pridat_pojistence(request):
         form = PojistenecForm()
 
     return render(request, 'pojistenci/pridat_pojistence.html', {'form': form})
+
 
 def index(request):
     logger.debug("Toto je debug zpráva")
@@ -266,6 +276,7 @@ class Zapomenute_Heslo(View):
                 messages.error(request, 'Uživatel s tímto e-mailem neexistuje.')
             return redirect('zapomenute_heslo')
         return render(request, 'pojistenci/password_reset_confirm.html', {'form': form})
+
 
 class PasswordResetConfirmView(View):
     def get(self, request, uidb64, token):
@@ -308,12 +319,14 @@ class PasswordResetConfirmView(View):
             messages.error(request, "Odkaz na resetování hesla není platný.")
             return redirect('zapomenute_heslo')
 
-#@login_required
+
+# @login_required
 def odhlasit(request):
     logout(request)
     return redirect('index')
 
-#@login_required
+
+# @login_required
 def prihlaseni(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -331,6 +344,7 @@ def prihlaseni(request):
         form = AuthenticationForm()
     return render(request, 'pojistenci/prihlaseni.html', {'form': form})
 
+
 def registrace(request):
     if request.method == 'POST':
         form = UzivatelForm(request.POST)
@@ -344,7 +358,7 @@ def registrace(request):
 
 
 @login_required
-#@user_passes_test(admin)
+# @user_passes_test(admin)
 def seznam_pojistnych_udalosti(request):
     pojistne_udalosti = PojistnaUdalost.objects.all().order_by('status')
     paginator = Paginator(pojistne_udalosti, 10)  # 10 událostí na stránku
@@ -353,8 +367,9 @@ def seznam_pojistnych_udalosti(request):
 
     return render(request, 'pojistne_udalosti/seznam_pojistnych_udalosti.html', {'page_obj': page_obj})
 
+
 @login_required
-#@user_passes_test(pojisteny)
+# @user_passes_test(pojisteny)
 def pridat_pojistnou_udalost(request):
     if request.method == 'POST':
         form = PojistnaUdalostForm(request.POST)
@@ -365,8 +380,9 @@ def pridat_pojistnou_udalost(request):
         form = PojistnaUdalostForm()
     return render(request, 'pojistne_udalosti/pridat_pojistnou_udalost.html', {'form': form})
 
+
 @login_required
-#@user_passes_test(admin)
+# @user_passes_test(admin)
 def upravit_pojistnou_udalost(request, id):
     pojistna_udalost = get_object_or_404(PojistnaUdalost, id=id)
     if request.method == 'POST':
@@ -378,12 +394,12 @@ def upravit_pojistnou_udalost(request, id):
         form = PojistnaUdalostForm(instance=pojistna_udalost)
     return render(request, 'pojistne_udalosti/upravit_pojistnou_udalost.html', {'form': form})
 
+
 @login_required
-#@user_passes_test(admin)
+# @user_passes_test(admin)
 def smazat_pojistnou_udalost(request, id):
     pojistna_udalost = get_object_or_404(PojistnaUdalost, id=id)
     if request.method == 'POST':
         pojistna_udalost.delete()
         return redirect('seznam_pojistnych_udalosti')
     return render(request, 'pojistne_udalosti/smazat_pojistnou_udalost.html', {'pojistna_udalost': pojistna_udalost})
-

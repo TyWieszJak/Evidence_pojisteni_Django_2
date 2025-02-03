@@ -101,7 +101,8 @@ class PojistnaUdalost(models.Model):
         ('ceka_na_schvaleni', 'Čeká na schválení'),
     ]
 
-    pojisteni = models.ForeignKey(Pojisteni, on_delete=models.CASCADE, related_name='udalosti')
+    pojisteni = models.ForeignKey(Pojisteni, on_delete=models.CASCADE,
+                                  related_name='udalosti')
     datum_udalosti = models.DateField()
     popis = models.TextField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
