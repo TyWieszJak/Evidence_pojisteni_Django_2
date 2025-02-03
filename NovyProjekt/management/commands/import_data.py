@@ -2,8 +2,10 @@ from django.core.management.base import BaseCommand
 from NovyProjekt.models import Pojistenec
 import csv
 
+
 class Command(BaseCommand):
-    help = 'Importuje data z CSV souboru do modelu Pojistenec bez propojování s Uživatelem'
+    help = ('Importuje data z CSV souboru do modelu Pojistenec'
+            ' bez propojování s Uživatelem')
 
     def handle(self, *args, **kwargs):
         try:
@@ -22,8 +24,6 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS('Data byla úspěšně importována.'))
         except Exception as e:
             self.stdout.write(self.style.ERROR(f'Chyba při importu: {str(e)}'))
-
-
 """           
     def handle(self, user=None, *args, **kwargs):
         with open('NovyProjekt/management/commands/MOCK_DATA.csv', mode='r') as file:

@@ -3,6 +3,7 @@ from .models import Pojistenec, Pojisteni, PojistnaUdalost, Uzivatel
 
 
 class UzivatelForm(forms.ModelForm):
+
     password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta:
