@@ -150,20 +150,30 @@ def filter(request, queryset):
 # @user_passes_test(admin)
 def seznam_pojistencu(request):
     vyhledavaci_form = VyhledavaciForm()
-    pojistenci = Pojistenec.objects.all()
+    # pojistenci = Pojistenec.objects.all()
 
-    # filterset = PojistenecFilter(request.GET, queryset=pojistenci)
+    #filterset = PojistenecFilter(request.GET, queryset=pojistenci)
 
     order_by = request.GET.get('order_by', 'jmeno')
-    order_direction = request.GET.get('order_direction', 'asc')
+    order_direction = request.GET.get('order_direction', 'asc') or 'asc'
+
+    if order_by not in ['jmeno', 'prijmeni', 'vek', 'adresa']:
+        order_by = 'jmeno'
+
     if order_direction == 'desc':
         order_by = f'-{order_by}'
+
     pojistenci = Pojistenec.objects.all().order_by(order_by)
 
     if request.GET.get('jmeno') or request.GET.get('prijmeni'):
-        jmeno = request.GET.get('jmeno')
-        prijmeni = request.GET.get('prijmeni')
-        pojistenci = pojistenci.filter(jmeno__icontains=jmeno, prijmeni__icontains=prijmeni)
+        jmeno = request.GET.get('jmeno').strip()
+        prijmeni = request.GET.get('prijmeni').strip()
+        if jmeno and prijmeni:
+            pojistenci = pojistenci.filter(jmeno__icontains=jmeno, prijmeni__icontains=prijmeni)
+        elif jmeno:
+            pojistenci = pojistenci.filter(jmeno__icontains=jmeno)
+        elif prijmeni:
+            pojistenci = pojistenci.filter(prijmeni__icontains=prijmeni)
 
     paginator = Paginator(pojistenci, 10)
     page_number = request.GET.get('page')
@@ -177,9 +187,9 @@ def seznam_pojistencu(request):
     return render(request, 'pojistenci/seznam_pojistencu.html', {
         'vyhledavaci_form': vyhledavaci_form,
         'page_obj': page_obj,
-        # 'filterset': filterset,
-        'order_by': request.GET.get('order_by', 'jmeno'),
-        'order_direction': request.GET.get('order_direction', 'asc'),
+        #'filterset': filterset,
+        'order_by': order_by,
+        'order_direction': order_direction,
     })
 
 
