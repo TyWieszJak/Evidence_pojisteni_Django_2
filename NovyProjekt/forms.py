@@ -9,7 +9,7 @@ class UzivatelForm(forms.ModelForm):
     class Meta:
 
         model = Uzivatel
-        fields = ['first_name', 'last_name', 'email', 'vek', 'foto']
+        fields = ['first_name', 'last_name', 'adresa', 'email', 'vek', 'foto']
 
     def save(self, commit=True):
         user = super().save(commit=False)

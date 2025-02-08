@@ -12,6 +12,8 @@ from django.views import View
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 import logging
+from django.db.models.functions import Lower
+from django.db.models import F
 
 logger = logging.getLogger(__name__)
 
@@ -160,9 +162,10 @@ def seznam_pojistencu(request):
         order_by = 'first_name'
 
     if order_direction == 'desc':
-        order_by = f'-{order_by}'
-
-    pojistenci = Uzivatel.objects.all().order_by(order_by)
+        # order_by = f'-{order_by}'
+        pojistenci = Uzivatel.objects.all().order_by(Lower(order_by).desc())
+    else:
+        pojistenci = Uzivatel.objects.all().order_by(Lower(order_by))
     # print(f"Jméno: {request.GET.get('jmeno')}, Příjmení: {request.GET.get('prijmeni')}")
 
     jmeno = request.GET.get('jmeno', '').strip() if request.GET.get('jmeno') else ''
@@ -194,7 +197,7 @@ def seznam_pojistencu(request):
 
 
 @login_required
-# @user_passes_test(admin)
+@user_passes_test(admin)
 def smazat_pojistence(request, pk):
     pojistenec = get_object_or_404(Uzivatel, pk=pk)
     if request.method == 'POST':
@@ -204,7 +207,7 @@ def smazat_pojistence(request, pk):
 
 
 @login_required
-@user_passes_test(pojisteny, admin)
+# @user_passes_test(pojisteny)
 def detail_pojistence(request, pk):
     pojistenec = get_object_or_404(Uzivatel, pk=pk)
     pojisteni = pojistenec.pojisteni.all()
