@@ -1,7 +1,3 @@
-from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
-from django.db import models
-from django.utils import timezone
-
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.db import models
@@ -24,6 +20,7 @@ class UzivatelManager(BaseUserManager):
         user.is_superuser = True
         user.save(using=self._db)
         return user
+
 
 # Model uživatele
 class Uzivatel(AbstractBaseUser, PermissionsMixin):
@@ -58,6 +55,7 @@ class Uzivatel(AbstractBaseUser, PermissionsMixin):
     def is_staff(self):
         return self.is_admin
 
+
 # Model pojištění
 class Pojisteni(models.Model):
     POJISTENI_CHOICES = [
@@ -82,6 +80,7 @@ class Pojisteni(models.Model):
 
     def __str__(self):
         return f"{self.uzivatel} - {self.typ_pojisteni}"
+
 
 # Model pojistné události
 class PojistnaUdalost(models.Model):

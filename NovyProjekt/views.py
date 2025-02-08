@@ -2,8 +2,8 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from .models import  Pojisteni, PojistnaUdalost, Uzivatel # Pojistenec
-from .forms import VyhledavaciForm, UzivatelForm # PojistenecForm
+from .models import  Pojisteni, PojistnaUdalost, Uzivatel  # Pojistenec
+from .forms import VyhledavaciForm, UzivatelForm  # PojistenecForm
 from .forms import PridaniForm, PojistnaUdalostForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, SetPasswordForm
@@ -164,7 +164,6 @@ def seznam_pojistencu(request):
 
     pojistenci = Uzivatel.objects.all().order_by(order_by)
     # print(f"Jméno: {request.GET.get('jmeno')}, Příjmení: {request.GET.get('prijmeni')}")
-
 
     jmeno = request.GET.get('jmeno', '').strip() if request.GET.get('jmeno') else ''
     prijmeni = request.GET.get('prijmeni', '').strip() if request.GET.get('prijmeni') else ''

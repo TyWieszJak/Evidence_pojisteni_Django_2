@@ -17,6 +17,7 @@ class UzivatelForm(forms.ModelForm):
             user.save()
         return user
 
+
 """
 class PojistenecForm(forms.ModelForm):
 
@@ -24,6 +25,7 @@ class PojistenecForm(forms.ModelForm):
         model = Pojistenec
         fields = ['jmeno', 'prijmeni', 'adresa', 'vek', 'foto']
 """
+
 
 class PridaniForm(forms.ModelForm):
 
