@@ -1,5 +1,5 @@
 from django import forms
-from .models import  Pojisteni, PojistnaUdalost, Uzivatel # Pojistenec
+from .models import Pojisteni, PojistnaUdalost, Uzivatel  # Pojistenec
 
 
 class UzivatelForm(forms.ModelForm):

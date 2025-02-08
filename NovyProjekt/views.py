@@ -2,7 +2,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from .models import  Pojisteni, PojistnaUdalost, Uzivatel  # Pojistenec
+from .models import Pojisteni, PojistnaUdalost, Uzivatel  # Pojistenec
 from .forms import VyhledavaciForm, UzivatelForm  # PojistenecForm
 from .forms import PridaniForm, PojistnaUdalostForm
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -204,7 +204,7 @@ def smazat_pojistence(request, pk):
 
 
 @login_required
-# @user_passes_test(pojisteny)
+@user_passes_test(pojisteny, admin)
 def detail_pojistence(request, pk):
     pojistenec = get_object_or_404(Uzivatel, pk=pk)
     pojisteni = pojistenec.pojisteni.all()

@@ -3,6 +3,7 @@ from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.db import models
 from django.utils import timezone
 
+
 # Správce uživatelů
 class UzivatelManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password=None, role="pojistenec"):
@@ -98,7 +99,6 @@ class PojistnaUdalost(models.Model):
 
     def __str__(self):
         return f"Událost {self.pojisteni} - {self.status}"
-
 
 
 """
