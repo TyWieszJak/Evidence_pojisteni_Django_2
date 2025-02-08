@@ -30,7 +30,7 @@
                     <tr>
                         <td>{{ pojist.typ_pojisteni }}</td>
                         <td>{{ pojist.platnost_do }}</td>
-                        <td>{{ pojist.pojistenec.jmeno }} {{ pojist.pojistenec.prijmeni }}</td>
+                        <td>{{ pojist.uzivatel.first_name }} {{ pojist.uzivatel.last_name }}</td>
                         <td>
                             <div class="pojistenci-actions">
                                 <a href="{% url 'upravit_pojisteni' pk=pojist.pk %}">Upravit</a>

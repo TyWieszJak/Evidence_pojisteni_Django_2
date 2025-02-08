@@ -81,7 +81,7 @@ def pridat_pojisteni(request, pk):
         if form.is_valid():
             print(form.cleaned_data)
             pojisteni = form.save(commit=False)
-            pojisteni.pojistenec = pojistenec
+            pojisteni.uzivatel = pojistenec
             pojisteni.save()
             return redirect('detail_pojistence', pk=pojistenec.pk)
     else:
@@ -93,7 +93,7 @@ def pridat_pojisteni(request, pk):
 # @user_passes_test(admin)
 def upravit_pojisteni(request, pk):
     pojisteni = get_object_or_404(Pojisteni, pk=pk)
-    pojistenec = pojisteni.pojistenec  # Získání pojištěnce z pojištění
+    pojistenec = pojisteni.uzivatel  # Získání pojištěnce z pojištění
 
     if request.method == 'POST':
         form = PridaniForm(request.POST, instance=pojisteni)
