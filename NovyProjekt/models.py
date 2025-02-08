@@ -2,7 +2,107 @@ from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
 from django.db import models
 from django.utils import timezone
 
+from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
+from django.db import models
+from django.utils import timezone
 
+# Správce uživatelů
+class UzivatelManager(BaseUserManager):
+    def create_user(self, email, first_name, last_name, password=None, role="pojistenec"):
+        if not email:
+            raise ValueError("Uživatel musí mít emailovou adresu.")
+        email = self.normalize_email(email)
+        user = self.model(email=email, first_name=first_name, last_name=last_name, role=role)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, email, first_name, last_name, password=None):
+        user = self.create_user(email, first_name, last_name, password, role="admin")
+        user.is_admin = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+# Model uživatele
+class Uzivatel(AbstractBaseUser, PermissionsMixin):
+    ROLE_CHOICES = [
+        ('admin', 'Admin'),
+        ('agent', 'Agent'),
+        ('pojistenec', 'Pojištěnec'),
+    ]
+
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    adresa = models.CharField(max_length=255, blank=True, null=True)
+    vek = models.IntegerField(null=True)
+    email = models.EmailField(max_length=300, unique=True)
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='pojistenec')
+    is_admin = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    last_login = models.DateTimeField(default=timezone.now)
+    date_joined = models.DateTimeField(default=timezone.now)
+    foto = models.ImageField(upload_to='images/', blank=True, null=True)
+
+    objects = UzivatelManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name']
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} ({self.role})"
+
+    @property
+    def is_staff(self):
+        return self.is_admin
+
+# Model pojištění
+class Pojisteni(models.Model):
+    POJISTENI_CHOICES = [
+        ('majetek', 'Pojištění majetku'),
+        ('zivotni', 'Životní pojištění'),
+        ('cestovni', 'Cestovní pojištění'),
+        ('vozidla', 'Pojištění vozidel'),
+        ('zdravotni', 'Zdravotní pojištění'),
+        ('urazove', 'Úrazové pojištění'),
+        ('odpovednost', 'Pojištění odpovědnosti'),
+        ('domacnost', 'Pojištění domácnosti'),
+        ('pravni_ochrana', 'Pojištění právní ochrany'),
+        ('podnikani', 'Pojištění podnikatelských rizik'),
+    ]
+
+    uzivatel = models.ForeignKey(Uzivatel, on_delete=models.CASCADE, related_name='pojisteni')
+    typ_pojisteni = models.CharField(max_length=50, choices=POJISTENI_CHOICES)
+    predmet_pojisteni = models.CharField(max_length=100)
+    datum_sjednani = models.DateField()
+    platnost_do = models.DateField()
+    castka = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.uzivatel} - {self.typ_pojisteni}"
+
+# Model pojistné události
+class PojistnaUdalost(models.Model):
+    STATUS_CHOICES = [
+        ('nahlaseno', 'Nahlášeno'),
+        ('vyreseno', 'Vyřešeno'),
+        ('ceka_na_schvaleni', 'Čeká na schválení'),
+    ]
+
+    pojisteni = models.ForeignKey(Uzivatel, on_delete=models.CASCADE, related_name='udalosti')
+    datum_udalosti = models.DateField()
+    popis = models.TextField()
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES)
+    castka = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"Událost {self.pojisteni} - {self.status}"
+
+
+
+"""
 # Vlastní správa uživatelů
 class UzivatelManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password=None):
@@ -112,3 +212,4 @@ class PojistnaUdalost(models.Model):
     def __str__(self):
         pojisteni_text = str(self.pojisteni) if self.pojisteni else "Neznámé pojištění"
         return f"Událost: {pojisteni_text} - Status: {self.status}"
+"""

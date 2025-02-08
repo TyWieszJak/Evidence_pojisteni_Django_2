@@ -31,12 +31,12 @@
         <thead>
             <tr>
                 <th>
-                    <a href="?order_by=jmeno&order_direction={% if request.GET.order_by == 'jmeno' and request.GET.order_direction == 'asc' %}desc{% else %}asc{% endif %}">
+                    <a href="?order_by=first_name&order_direction={% if request.GET.order_by == 'first_name' and request.GET.order_direction == 'asc' %}desc{% else %}asc{% endif %}">
                         Jméno
                     </a>
                 </th>
                 <th>
-                    <a href="?order_by=prijmeni&order_direction={% if request.GET.order_by == 'prijmeni' and request.GET.order_direction == 'asc' %}desc{% else %}asc{% endif %}">
+                    <a href="?order_by=last_name&order_direction={% if request.GET.order_by == 'last_name' and request.GET.order_direction == 'asc' %}desc{% else %}asc{% endif %}">
                         Příjmení
                     </a>
                 </th>
@@ -51,9 +51,10 @@
         <tbody>
             {% for pojistenec in page_obj %}
                 <tr>
-                    <td>{{ pojistenec.jmeno }}</td>
-                    <td>{{ pojistenec.prijmeni }}</td>
+                    <td>{{ pojistenec.first_name }}</td>
+                    <td>{{ pojistenec.last_name }}</td>
                     <td>{{ pojistenec.adresa }}</td>
+
                     <td>
                         <div class="pojistenci-actions">
                             <a href="{% url 'detail_pojistence' pojistenec.pk %}">Detail</a>
@@ -69,20 +70,20 @@
     <!-- Paginace -->
     <div class="pagination">
         <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page=1&order_by={{ request.GET.order_by }}">První</a>
-                <a href="?page={{ page_obj.previous_page_number }}&order_by={{ request.GET.order_by }}">Předchozí</a>
-            {% endif %}
+        {% if page_obj.has_previous %}
+            <a href="?page=1&order_by={{ request.GET.order_by }}&order_direction={{ request.GET.order_direction }}&jmeno={{ request.GET.jmeno }}&prijmeni={{ request.GET.prijmeni }}">První</a>
+            <a href="?page={{ page_obj.previous_page_number }}&order_by={{ request.GET.order_by }}&order_direction={{ request.GET.order_direction }}&jmeno={{ request.GET.jmeno }}&prijmeni={{ request.GET.prijmeni }}">Předchozí</a>
+        {% endif %}
 
-            <span class="current">
-                Stránka {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
-            </span>
-
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}&order_by={{ request.GET.order_by }}">Další</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}&order_by={{ request.GET.order_by }}">Poslední</a>
-            {% endif %}
+        <span class="current">
+            Stránka {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
         </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}&order_by={{ request.GET.order_by }}&order_direction={{ request.GET.order_direction }}&jmeno={{ request.GET.jmeno }}&prijmeni={{ request.GET.prijmeni }}">Další</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}&order_by={{ request.GET.order_by }}&order_direction={{ request.GET.order_direction }}&jmeno={{ request.GET.jmeno }}&prijmeni={{ request.GET.prijmeni }}">Poslední</a>
+        {% endif %}
+    </span>
     </div>
 
 

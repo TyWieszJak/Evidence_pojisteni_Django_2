@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Uzivatel, Pojistenec, Pojisteni, PojistnaUdalost
+from .models import Uzivatel, Pojisteni, PojistnaUdalost # Pojistenec
 
 
 # Registrace vlastního uživatelského modelu
@@ -21,7 +21,7 @@ class UzivatelAdmin(admin.ModelAdmin):
         }),
     )
 
-
+"""
 # Registrace modelu Pojistenec
 @admin.register(Pojistenec)
 class PojistenecAdmin(admin.ModelAdmin):
@@ -30,15 +30,15 @@ class PojistenecAdmin(admin.ModelAdmin):
     list_filter = ('vek',)
     ordering = ('prijmeni',)
     raw_id_fields = ('user',)
-
+"""
 
 # Registrace modelu Pojisteni
 @admin.register(Pojisteni)
 class PojisteniAdmin(admin.ModelAdmin):
-    list_display = ('pojistenec', 'typ_pojisteni',
+    list_display = ('uzivatel', 'typ_pojisteni',
                     'datum_sjednani', 'platnost_do', 'castka')
-    search_fields = ('typ_pojisteni', 'pojistenec__jmeno',
-                     'pojistenec__prijmeni')
+    search_fields = ('typ_pojisteni', 'uzivatel__first_name',
+                     'uzivatel__last_name')
     list_filter = ('typ_pojisteni', 'datum_sjednani')
     ordering = ('-datum_sjednani',)
 
