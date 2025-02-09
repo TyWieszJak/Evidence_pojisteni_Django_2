@@ -348,7 +348,7 @@ def prihlaseni(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, 'Byl jste úspěšně přihlášen!')
-                return redirect('index')  # Přesměrování po úspěšném přihlášení
+                return redirect('index')
         else:
             messages.error(request, 'Nesprávné uživatelské jméno nebo heslo.')
     else:
