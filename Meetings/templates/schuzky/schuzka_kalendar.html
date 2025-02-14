@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}Přidání schůzky{% endblock %}
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'css/kalendar.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="calendar-container">
+        <h2>Vyberte datum a čas pro schůzku</h2>
+        <div id="calendar"></div>
+        <form action="{% url 'vytvorit_schuzku' pk=pojistenec.pk %}" method="POST">
+            {% csrf_token %}
+            <label for="datum_cas">Datum a čas:</label>
+            <input type="datetime-local" id="datum_cas" name="datum_cas" required>
+            <label for="poznamka">Poznámka:</label>
+            <textarea id="poznamka" name="poznamka"></textarea>
+            <button type="submit">Vytvořit schůzku</button>
+        </form>
+    </div>
+{% endblock %}

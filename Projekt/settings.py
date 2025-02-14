@@ -53,6 +53,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Meetings',
     'NovyProjekt',
     'django.contrib.admin',
     'django.contrib.auth',

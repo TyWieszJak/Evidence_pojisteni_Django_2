@@ -17,6 +17,11 @@
                     <li><strong>Příjmení:</strong> {{ pojistenec.last_name }}</li>
                     <li><strong>Adresa:</strong> {{ pojistenec.adresa }}</li>
                     <li><strong>Věk:</strong> {{ pojistenec.vek }}</li>
+                    {% if pojistenec.schuzky.first %}
+                        <li><strong>Sjednaná schůzka:</strong> {{ pojistenec.schuzky.first.datum_cas|date:"d.m.Y H:i" }}</li>
+                    {% else %}
+                        <li><strong>Sjednaná schůzka:</strong> Není naplánována žádná schůzka.</li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -35,6 +40,7 @@
             <a href="{% url 'smazat_pojistence' pk=pojistenec.pk %}">Smazat</a>
             <a href="{% url 'seznam_pojistencu' %}" class="btn-detail">Zpět na seznam</a>
             <a href="{% url 'pridat_pojisteni' pk=pojistenec.pk %}" class="btn-detail">Přidat pojištění</a>
+            <a href="{% url 'vytvorit_schuzku' pk=pojistenec.pk %}" class="btn-detail">Přidat schůzku</a>
         </div>
     </div>
 <!-- Tabulka sjednaná pojištění -->
