@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 from .models import Schuzka
 from NovyProjekt.models import Uzivatel
 
+
 class SchuzkaService:
     @staticmethod
     def create_schuzka(data):

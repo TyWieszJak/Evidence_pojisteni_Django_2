@@ -2,9 +2,8 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView
 from .models import Schuzka
 from NovyProjekt.models import Uzivatel
-from django.urls import reverse_lazy
-from .services import SchuzkaService
 from django.http import Http404
+
 
 class SchuzkaCreateView(CreateView):
     model = Schuzka

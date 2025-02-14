@@ -12,7 +12,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("NovyProjekt.urls")),
     path('Meetings/', include('Meetings.urls')),
-    path('api/',api.urls),
+    path('api/', api.urls),
 ]
 
 if settings.DEBUG:
