@@ -31,23 +31,39 @@
         <thead>
             <tr>
                 <th>
-                    <a href="?order_by=first_name&order_direction={% if request.GET.order_by == 'first_name' and request.GET.order_direction == 'asc' %}desc{% else %}asc{% endif %}">
-                        Jméno
+                    Jméno
+                    <a href="?order_by=first_name&order_direction=asc">
+                        <span style="{% if request.GET.order_by == 'first_name' and request.GET.order_direction == 'asc' %}font-weight: bold;{% endif %}">▲</span>
+                    </a>
+                    <a href="?order_by=first_name&order_direction=desc">
+                        <span style="{% if request.GET.order_by == 'first_name' and request.GET.order_direction == 'desc' %}font-weight: bold;{% endif %}">▼</span>
                     </a>
                 </th>
                 <th>
-                    <a href="?order_by=last_name&order_direction={% if request.GET.order_by == 'last_name' and request.GET.order_direction == 'asc' %}desc{% else %}asc{% endif %}">
-                        Příjmení
+                    Příjmení
+                    <a href="?order_by=last_name&order_direction=asc">
+                        <span style="{% if request.GET.order_by == 'last_name' and request.GET.order_direction == 'asc' %}font-weight: bold;{% endif %}">▲</span>
+                    </a>
+                    <a href="?order_by=last_name&order_direction=desc">
+                        <span style="{% if request.GET.order_by == 'last_name' and request.GET.order_direction == 'desc' %}font-weight: bold;{% endif %}">▼</span>
                     </a>
                 </th>
                 <th>
-                    <a href="?order_by=adresa&order_direction={% if request.GET.order_by == 'adresa' and request.GET.order_direction == 'asc' %}desc{% else %}asc{% endif %}">
-                        Adresa
+                    Adresa
+                    <a href="?order_by=adresa&order_direction=asc">
+                        <span style="{% if request.GET.order_by == 'adresa' and request.GET.order_direction == 'asc' %}font-weight: bold;{% endif %}">▲</span>
+                    </a>
+                    <a href="?order_by=adresa&order_direction=desc">
+                        <span style="{% if request.GET.order_by == 'adresa' and request.GET.order_direction == 'desc' %}font-weight: bold;{% endif %}">▼</span>
                     </a>
                 </th>
                 <th>Akce</th>
             </tr>
         </thead>
+
+
+
+
         <tbody>
             {% for pojistenec in page_obj %}
                 <tr>

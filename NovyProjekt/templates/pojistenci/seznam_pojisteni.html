@@ -19,9 +19,33 @@
         <table>
             <thead>
                 <tr>
-                    <th>Typ pojištění</th>
-                    <th>Platnost do</th>
-                    <th>Pojištěnec</th>
+                    <th>
+                        Typ pojištění
+                        <a href="?order_by=typ_pojisteni&order_direction=asc">
+                            <span style="{% if request.GET.order_by == 'typ_pojisteni' and request.GET.order_direction == 'asc' %}font-weight: bold;{% endif %}">▲</span>
+                        </a>
+                        <a href="?order_by=typ_pojisteni&order_direction=desc">
+                            <span style="{% if request.GET.order_by == 'typ_pojisteni' and request.GET.order_direction == 'desc' %}font-weight: bold;{% endif %}">▼</span>
+                        </a>
+                    </th>
+                    <th>
+                        Platnost do
+                        <a href="?order_by=typ_pojisteni&order_direction=asc">
+                            <span style="{% if request.GET.order_by == 'platnost_do' and request.GET.order_direction == 'asc' %}font-weight: bold;{% endif %}">▲</span>
+                        </a>
+                        <a href="?order_by=typ_pojisteni&order_direction=desc">
+                            <span style="{% if request.GET.order_by == 'platnost_do' and request.GET.order_direction == 'desc' %}font-weight: bold;{% endif %}">▼</span>
+                        </a>
+                    </th>
+                    <th>
+                        Pojištěnec
+                        <a href="?order_by=typ_pojisteni&order_direction=asc">
+                            <span style="{% if request.GET.order_by == 'uzivatel' and request.GET.order_direction == 'asc' %}font-weight: bold;{% endif %}">▲</span>
+                        </a>
+                        <a href="?order_by=typ_pojisteni&order_direction=desc">
+                            <span style="{% if request.GET.order_by == 'uzivatel' and request.GET.order_direction == 'desc' %}font-weight: bold;{% endif %}">▼</span>
+                        </a>
+                    </th>
                     <th>Akce</th>
                 </tr>
             </thead>

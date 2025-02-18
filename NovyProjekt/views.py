@@ -52,7 +52,19 @@ def seznam_udalosti(request):
 # @user_passes_test(admin)
 def seznam_pojisteni(request):
     vyhledavaci_form = VyhledavaciForm(request.GET or None)
-    pojisteni = Pojisteni.objects.all()
+
+    order_by = request.GET.get('order_by', 'uzivatel')
+    order_direction = request.GET.get('order_direction', 'desc')
+
+    if order_by not in ['platnost_do', 'typ_pojisteni', 'uzivatel']:
+        order_by = 'uzivatel'
+
+    if order_direction == 'desc':
+        pojisteni = Pojisteni.objects.all().order_by(Lower(order_by).desc())
+    else:
+        pojisteni = Pojisteni.objects.all().order_by(Lower(order_by))
+
+    #pojisteni = Pojisteni.objects.all()
     if vyhledavaci_form.is_valid():
         hledany_typ = vyhledavaci_form.cleaned_data.get('typ_pojisteni')
         if hledany_typ:
@@ -68,6 +80,8 @@ def seznam_pojisteni(request):
     return render(request, 'pojistenci/seznam_pojisteni.html', {
         'vyhledavaci_form': vyhledavaci_form,
         'pojisteni': page_obj,
+        'order_by': order_by,
+        'order_direction': order_direction,
 
     })
 
