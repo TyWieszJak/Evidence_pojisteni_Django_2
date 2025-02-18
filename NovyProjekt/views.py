@@ -64,7 +64,7 @@ def seznam_pojisteni(request):
     else:
         pojisteni = Pojisteni.objects.all().order_by(Lower(order_by))
 
-    #pojisteni = Pojisteni.objects.all()
+    # pojisteni = Pojisteni.objects.all()
     if vyhledavaci_form.is_valid():
         hledany_typ = vyhledavaci_form.cleaned_data.get('typ_pojisteni')
         if hledany_typ:
